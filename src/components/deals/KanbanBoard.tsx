@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { MoreHorizontal, Edit, Trash2, Eye, Settings } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -176,14 +177,18 @@ export const KanbanBoard = () => {
                                         </Button>
                                       </DropdownMenuTrigger>
                                       <DropdownMenuContent align="end" className="bg-popover border border-border shadow-lg">
-                                        <DropdownMenuItem className="cursor-pointer">
-                                          <Eye className="mr-2 h-4 w-4" />
-                                          View
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className="cursor-pointer">
-                                          <Edit className="mr-2 h-4 w-4" />
-                                          Edit
-                                        </DropdownMenuItem>
+                                         <DropdownMenuItem className="cursor-pointer" asChild>
+                                           <Link to={`/deals/${deal.id}`}>
+                                             <Eye className="mr-2 h-4 w-4" />
+                                             View
+                                           </Link>
+                                         </DropdownMenuItem>
+                                         <DropdownMenuItem className="cursor-pointer" asChild>
+                                           <Link to={`/deals/${deal.id}/edit`}>
+                                             <Edit className="mr-2 h-4 w-4" />
+                                             Edit
+                                           </Link>
+                                         </DropdownMenuItem>
                                         <DropdownMenuItem 
                                           className="cursor-pointer text-destructive hover:bg-destructive/10"
                                           onClick={() => handleDelete(deal)}
