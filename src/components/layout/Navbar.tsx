@@ -1,9 +1,11 @@
 import { Building2, Settings, User, Plus } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { useDealStore } from '../../store/dealStore';
 
 export const Navbar = () => {
   const setCreateModalOpen = useDealStore((state) => state.setCreateModalOpen);
+  const location = useLocation();
 
   return (
     <nav className="navbar h-16 flex items-center justify-between px-6">
@@ -21,24 +23,36 @@ export const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="flex items-center space-x-6">
-          <a 
-            href="#deals" 
-            className="text-sm font-medium text-primary border-b-2 border-primary pb-4 -mb-4"
+          <Link 
+            to="/deals" 
+            className={`text-sm font-medium transition-colors ${
+              location.pathname === '/' || location.pathname === '/deals'
+                ? 'text-primary border-b-2 border-primary pb-4 -mb-4'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
             Deals
-          </a>
-          <a 
-            href="#settings" 
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          </Link>
+          <Link 
+            to="/settings" 
+            className={`text-sm font-medium transition-colors ${
+              location.pathname === '/settings'
+                ? 'text-primary border-b-2 border-primary pb-4 -mb-4'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
             Settings
-          </a>
-          <a 
-            href="#profile" 
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          </Link>
+          <Link 
+            to="/profile" 
+            className={`text-sm font-medium transition-colors ${
+              location.pathname === '/profile'
+                ? 'text-primary border-b-2 border-primary pb-4 -mb-4'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
             Profile
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -52,12 +66,16 @@ export const Navbar = () => {
           New Deal
         </Button>
         
-        <Button variant="ghost" size="sm">
-          <Settings className="w-4 h-4" />
+        <Button variant="ghost" size="sm" asChild>
+          <Link to="/settings">
+            <Settings className="w-4 h-4" />
+          </Link>
         </Button>
         
-        <Button variant="ghost" size="sm">
-          <User className="w-4 h-4" />
+        <Button variant="ghost" size="sm" asChild>
+          <Link to="/profile">
+            <User className="w-4 h-4" />
+          </Link>
         </Button>
       </div>
     </nav>
