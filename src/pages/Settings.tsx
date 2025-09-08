@@ -1,262 +1,276 @@
-import { Moon, Sun, Bell, Lock, User, Palette, Database } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { 
+  Settings as SettingsIcon, 
+  Eye, 
+  EyeOff, 
+  Bell, 
+  Shield, 
+  User, 
+  Palette,
+  Database,
+  Download,
+  Trash2,
+  Key,
+  Sun,
+  Moon
+} from 'lucide-react';
+import { useTheme } from '@/components/theme/ThemeProvider';
 
 export const Settings = () => {
+  const { theme, setTheme } = useTheme();
+
   return (
-    <div className="container mx-auto px-6 py-8 max-w-4xl">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground">Settings</h1>
-        <p className="text-muted-foreground mt-1">
-          Manage your application preferences and account settings
-        </p>
+    <div className="min-h-screen bg-background theme-transition">
+      {/* Header */}
+      <div className="bg-background/95 backdrop-blur-sm border-b border-border/50 px-6 py-4">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+            <SettingsIcon className="w-4 h-4 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-foreground">Settings</h1>
+            <p className="text-sm text-muted-foreground">Manage your account and application preferences</p>
+          </div>
+        </div>
       </div>
 
-      <div className="space-y-6">
-        {/* Dashboard Preferences */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Database className="w-5 h-5 mr-2" />
-              Dashboard Preferences
-            </CardTitle>
-            <CardDescription>
-              Configure your dashboard view settings and data display preferences
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div>
-              <Label className="text-base font-medium mb-3 block">Default View Mode</Label>
-              <div className="flex space-x-2">
-                <Button variant="default" size="sm">Table View</Button>
-                <Button variant="outline" size="sm">Kanban View</Button>
-              </div>
-            </div>
-
-            <Separator />
-
-            <div>
-              <Label className="text-base font-medium mb-3 block">Table Column Visibility</Label>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="flex items-center space-x-2">
-                  <Switch checked />
-                  <Label className="text-sm">Client Name</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Switch checked />
-                  <Label className="text-sm">Product Name</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Switch />
-                  <Label className="text-sm">Stage</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Switch />
-                  <Label className="text-sm">Created Date</Label>
-                </div>
-              </div>
-            </div>
-
-            <Separator />
-
-            <div>
-              <Label className="text-base font-medium mb-3 block">Kanban Card Metadata</Label>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="flex items-center space-x-2">
-                  <Switch checked />
-                  <Label className="text-sm">Show Client</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Switch checked />
-                  <Label className="text-sm">Show Product</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Switch />
-                  <Label className="text-sm">Show Value</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Switch />
-                  <Label className="text-sm">Show Created Date</Label>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Theme Settings */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Palette className="w-5 h-5 mr-2" />
-              Appearance
-            </CardTitle>
-            <CardDescription>
-              Customize the look and feel of your dashboard
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label className="text-base">Dark Mode</Label>
-                <div className="text-sm text-muted-foreground">
-                  Toggle between light and dark themes
-                </div>
-              </div>
+      <div className="p-6 max-w-4xl mx-auto">
+        <div className="grid gap-6">
+          {/* Appearance */}
+          <Card className="premium-card theme-transition">
+            <CardHeader className="pb-4">
               <div className="flex items-center space-x-2">
-                <Sun className="w-4 h-4" />
-                <Switch />
-                <Moon className="w-4 h-4" />
+                <Palette className="w-5 h-5 text-primary" />
+                <CardTitle className="text-lg">Appearance</CardTitle>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+              <CardDescription>Customize how Vobb looks and feels</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <Label className="text-sm font-medium">Theme</Label>
+                  <p className="text-xs text-muted-foreground">Choose your preferred theme</p>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Button
+                    variant={theme === 'light' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setTheme('light')}
+                    className="theme-transition"
+                  >
+                    <Sun className="w-4 h-4 mr-1" />
+                    Light
+                  </Button>
+                  <Button
+                    variant={theme === 'dark' ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setTheme('dark')}
+                    className="theme-transition"
+                  >
+                    <Moon className="w-4 h-4 mr-1" />
+                    Dark
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-        {/* Notifications */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Bell className="w-5 h-5 mr-2" />
-              Notifications
-            </CardTitle>
-            <CardDescription>
-              Manage how you receive updates and alerts
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label className="text-base">Deal Updates</Label>
-                <div className="text-sm text-muted-foreground">
-                  Get notified when deals change status
-                </div>
+          {/* Dashboard Preferences */}
+          <Card className="premium-card theme-transition">
+            <CardHeader className="pb-4">
+              <div className="flex items-center space-x-2">
+                <Database className="w-5 h-5 text-primary" />
+                <CardTitle className="text-lg">Dashboard Preferences</CardTitle>
               </div>
-              <Switch checked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label className="text-base">Email Digest</Label>
-                <div className="text-sm text-muted-foreground">
-                  Receive daily email summaries
+              <CardDescription>Configure your dashboard view and data display</CardDescription>
+            </CardHeader>
+            <CardContent className="compact-spacing">
+              <div className="space-y-4">
+                <div className="space-y-3">
+                  <Label className="text-sm font-medium">Default View Mode</Label>
+                  <div className="flex space-x-2">
+                    <Button variant="default" size="sm">Table View</Button>
+                    <Button variant="outline" size="sm">Kanban View</Button>
+                  </div>
                 </div>
-              </div>
-              <Switch checked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label className="text-base">Mobile Alerts</Label>
-                <div className="text-sm text-muted-foreground">
-                  Push notifications on mobile devices
-                </div>
-              </div>
-              <Switch />
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label className="text-base">Weekly Report</Label>
-                <div className="text-sm text-muted-foreground">
-                  Weekly performance reports
-                </div>
-              </div>
-              <Switch checked />
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Privacy & Security */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Lock className="w-5 h-5 mr-2" />
-              Privacy & Security
-            </CardTitle>
-            <CardDescription>
-              Manage your account security and data preferences
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <Label className="text-base">Two-Factor Authentication</Label>
-                <div className="text-sm text-muted-foreground">
-                  Add an extra layer of security to your account
-                </div>
-              </div>
-              <Badge variant="outline">Not Enabled</Badge>
-            </div>
-            
-            <Separator />
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <Label className="text-base">Data Export</Label>
-                <div className="text-sm text-muted-foreground">
-                  Download all your account data
-                </div>
-              </div>
-              <Button variant="outline" size="sm">
-                Export Data
-              </Button>
-            </div>
-            
-            <Separator />
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <Label className="text-base">Clear Preferences</Label>
-                <div className="text-sm text-muted-foreground">
-                  Reset all dashboard preferences to default
-                </div>
-              </div>
-              <Button variant="destructive" size="sm">
-                Clear Data
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+                <Separator />
 
-        {/* Account Management */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <User className="w-5 h-5 mr-2" />
-              Account Management
-            </CardTitle>
-            <CardDescription>
-              Manage your account status and subscription
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <Label className="text-base">Account Status</Label>
-                <div className="text-sm text-muted-foreground">
-                  Your current account status and plan
+                <div className="space-y-3">
+                  <Label className="text-sm font-medium">Table Columns</Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { label: 'Client Name', checked: true },
+                      { label: 'Product Name', checked: true },
+                      { label: 'Stage', checked: true },
+                      { label: 'Created Date', checked: false }
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center space-x-2">
+                        <Switch id={item.label} defaultChecked={item.checked} />
+                        <Label htmlFor={item.label} className="text-sm">{item.label}</Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="space-y-3">
+                  <Label className="text-sm font-medium">Kanban Card Metadata</Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { label: 'Show Client', checked: true },
+                      { label: 'Show Product', checked: true },
+                      { label: 'Show Value', checked: false },
+                      { label: 'Show Created Date', checked: false }
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center space-x-2">
+                        <Switch id={item.label} defaultChecked={item.checked} />
+                        <Label htmlFor={item.label} className="text-sm">{item.label}</Label>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-800">
-                Active
-              </Badge>
-            </div>
-            
-            <Separator />
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <Label className="text-base">Change Password</Label>
-                <div className="text-sm text-muted-foreground">
-                  Update your account password
+            </CardContent>
+          </Card>
+
+          {/* Notifications */}
+          <Card className="premium-card theme-transition">
+            <CardHeader className="pb-4">
+              <div className="flex items-center space-x-2">
+                <Bell className="w-5 h-5 text-primary" />
+                <CardTitle className="text-lg">Notifications</CardTitle>
+              </div>
+              <CardDescription>Control how and when you receive notifications</CardDescription>
+            </CardHeader>
+            <CardContent className="compact-spacing">
+              <div className="space-y-4">
+                {[
+                  { 
+                    title: 'Deal Updates', 
+                    description: 'Notifications for deal stage changes and updates',
+                    checked: true 
+                  },
+                  { 
+                    title: 'Email Digest', 
+                    description: 'Daily summary of your deals and activities',
+                    checked: true 
+                  },
+                  { 
+                    title: 'Mobile Alerts', 
+                    description: 'Push notifications on your mobile device',
+                    checked: false 
+                  },
+                  { 
+                    title: 'Weekly Reports', 
+                    description: 'Comprehensive weekly performance reports',
+                    checked: true 
+                  }
+                ].map((item) => (
+                  <div key={item.title} className="flex items-center justify-between">
+                    <div className="space-y-1">
+                      <Label className="text-sm font-medium">{item.title}</Label>
+                      <p className="text-xs text-muted-foreground">{item.description}</p>
+                    </div>
+                    <Switch defaultChecked={item.checked} />
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Privacy & Security */}
+          <Card className="premium-card theme-transition">
+            <CardHeader className="pb-4">
+              <div className="flex items-center space-x-2">
+                <Shield className="w-5 h-5 text-primary" />
+                <CardTitle className="text-lg">Privacy & Security</CardTitle>
+              </div>
+              <CardDescription>Manage your security settings and data privacy</CardDescription>
+            </CardHeader>
+            <CardContent className="compact-spacing">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium">Two-Factor Authentication</Label>
+                    <p className="text-xs text-muted-foreground">Add an extra layer of security to your account</p>
+                  </div>
+                  <Badge variant="outline" className="text-green-600 border-green-200">
+                    Enabled
+                  </Badge>
+                </div>
+
+                <Separator />
+
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium">Export Data</Label>
+                    <p className="text-xs text-muted-foreground">Download a copy of your data</p>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    <Download className="w-4 h-4 mr-2" />
+                    Export
+                  </Button>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium">Clear Preferences</Label>
+                    <p className="text-xs text-muted-foreground">Reset all settings to default</p>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Clear
+                  </Button>
                 </div>
               </div>
-              <Button variant="outline" size="sm">
-                Change Password
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+
+          {/* Account Management */}
+          <Card className="premium-card theme-transition">
+            <CardHeader className="pb-4">
+              <div className="flex items-center space-x-2">
+                <User className="w-5 h-5 text-primary" />
+                <CardTitle className="text-lg">Account Management</CardTitle>
+              </div>
+              <CardDescription>Manage your account settings and preferences</CardDescription>
+            </CardHeader>
+            <CardContent className="compact-spacing">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium">Account Status</Label>
+                    <p className="text-xs text-muted-foreground">Your current account status</p>
+                  </div>
+                  <Badge className="bg-green-100 text-green-800 border-green-200">
+                    Active
+                  </Badge>
+                </div>
+
+                <Separator />
+
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium">Change Password</Label>
+                    <p className="text-xs text-muted-foreground">Update your account password</p>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    <Key className="w-4 h-4 mr-2" />
+                    Change
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

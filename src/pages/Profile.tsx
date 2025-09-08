@@ -1,140 +1,182 @@
-import { User, Mail, Phone, Building2, Calendar, Settings } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Separator } from '@/components/ui/separator';
+import { 
+  User, 
+  Mail, 
+  Phone, 
+  Building, 
+  Calendar,
+  TrendingUp,
+  Target,
+  DollarSign,
+  Award,
+  Edit3,
+  MapPin,
+  Clock
+} from 'lucide-react';
 
 export const Profile = () => {
-  // Mock user data - in a real app this would come from an API/auth service
   const user = {
-    id: '1',
     name: 'John Doe',
-    email: 'john.doe@vobb.com',
+    email: 'john.doe@example.com',
     phone: '+1 (555) 123-4567',
-    company: 'Vobb Technologies',
-    role: 'Senior Sales Agent',
-    joinDate: '2023-01-15',
-    avatar: null,
+    role: 'Senior Sales Manager',
+    company: 'Vobb Atlas',
+    location: 'New York, NY',
+    joinDate: 'January 2023',
+    avatar: '/api/placeholder/120/120',
     stats: {
-      totalDeals: 47,
-      completedDeals: 23,
-      winRate: 49,
-      totalValue: 1250000
+      totalDeals: 142,
+      completedDeals: 89,
+      winRate: 62.7,
+      totalValue: 2450000
     }
   };
 
+  const recentActivities = [
+    { action: 'Closed deal with TechCorp', time: '2 hours ago', type: 'success' },
+    { action: 'Updated Acme Inc proposal', time: '5 hours ago', type: 'info' },
+    { action: 'Scheduled call with StartupXYZ', time: '1 day ago', type: 'info' },
+    { action: 'Lost deal with BigCorp', time: '2 days ago', type: 'warning' }
+  ];
+
   return (
-    <div className="container mx-auto px-6 py-8 max-w-4xl">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Profile</h1>
-          <p className="text-muted-foreground mt-1">Manage your account information and preferences</p>
+    <div className="min-h-screen bg-background theme-transition">
+      {/* Header */}
+      <div className="bg-background/95 backdrop-blur-sm border-b border-border/50 px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+              <User className="w-4 h-4 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-foreground">Profile</h1>
+              <p className="text-sm text-muted-foreground">View and manage your profile information</p>
+            </div>
+          </div>
+          <Button className="theme-transition">
+            <Edit3 className="w-4 h-4 mr-2" />
+            Edit Profile
+          </Button>
         </div>
-        <Button variant="outline">
-          <Settings className="w-4 h-4 mr-2" />
-          Edit Profile
-        </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Profile Card */}
-        <Card className="lg:col-span-1">
-          <CardHeader className="text-center">
-            <Avatar className="w-24 h-24 mx-auto mb-4">
-              <AvatarImage src={user.avatar || ''} alt={user.name} />
-              <AvatarFallback className="text-2xl bg-primary/10 text-primary">
-                {user.name.split(' ').map(n => n[0]).join('')}
-              </AvatarFallback>
-            </Avatar>
-            <CardTitle className="text-xl">{user.name}</CardTitle>
-            <CardDescription>
-              <Badge variant="secondary" className="mt-1">
-                {user.role}
-              </Badge>
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <Mail className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm">{user.email}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Phone className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm">{user.phone}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Building2 className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm">{user.company}</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Calendar className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm">Joined {new Date(user.joinDate).toLocaleDateString()}</span>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="p-6 max-w-6xl mx-auto">
+        <div className="grid gap-6 lg:grid-cols-3">
+          {/* Profile Info */}
+          <div className="lg:col-span-1">
+            <Card className="premium-card theme-transition">
+              <CardHeader className="text-center pb-4">
+                <Avatar className="w-24 h-24 mx-auto mb-4">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback className="text-2xl bg-primary/10 text-primary">
+                    {user.name.split(' ').map(n => n[0]).join('')}
+                  </AvatarFallback>
+                </Avatar>
+                <CardTitle className="text-xl">{user.name}</CardTitle>
+                <CardDescription className="text-sm">{user.role}</CardDescription>
+                <Badge variant="secondary" className="mt-2">
+                  Active
+                </Badge>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3 text-sm">
+                    <Mail className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-foreground">{user.email}</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-sm">
+                    <Phone className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-foreground">{user.phone}</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-sm">
+                    <Building className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-foreground">{user.company}</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-sm">
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-foreground">{user.location}</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-sm">
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-foreground">Joined {user.joinDate}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-        {/* Performance Stats */}
-        <div className="lg:col-span-2 space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Performance Overview</CardTitle>
-              <CardDescription>Your deal performance statistics</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{user.stats.totalDeals}</div>
-                  <div className="text-sm text-muted-foreground">Total Deals</div>
+          {/* Performance & Activity */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Performance Overview */}
+            <Card className="premium-card theme-transition">
+              <CardHeader className="pb-4">
+                <div className="flex items-center space-x-2">
+                  <TrendingUp className="w-5 h-5 text-primary" />
+                  <CardTitle className="text-lg">Performance Overview</CardTitle>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-success">{user.stats.completedDeals}</div>
-                  <div className="text-sm text-muted-foreground">Completed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-warning">{user.stats.winRate}%</div>
-                  <div className="text-sm text-muted-foreground">Win Rate</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">
-                    ${(user.stats.totalValue / 1000000).toFixed(1)}M
+                <CardDescription>Your sales performance metrics</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="text-center p-4 bg-muted/30 rounded-xl">
+                    <Target className="w-8 h-8 text-primary mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-foreground">{user.stats.totalDeals}</div>
+                    <div className="text-xs text-muted-foreground">Total Deals</div>
                   </div>
-                  <div className="text-sm text-muted-foreground">Total Value</div>
+                  <div className="text-center p-4 bg-muted/30 rounded-xl">
+                    <Award className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-foreground">{user.stats.completedDeals}</div>
+                    <div className="text-xs text-muted-foreground">Completed</div>
+                  </div>
+                  <div className="text-center p-4 bg-muted/30 rounded-xl">
+                    <TrendingUp className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-foreground">{user.stats.winRate}%</div>
+                    <div className="text-xs text-muted-foreground">Win Rate</div>
+                  </div>
+                  <div className="text-center p-4 bg-muted/30 rounded-xl">
+                    <DollarSign className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                    <div className="text-2xl font-bold text-foreground">
+                      ${(user.stats.totalValue / 1000000).toFixed(1)}M
+                    </div>
+                    <div className="text-xs text-muted-foreground">Total Value</div>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
-              <CardDescription>Your latest deal activities</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                  <div>
-                    <div className="font-medium text-sm">Deal with Acme Corp completed</div>
-                    <div className="text-xs text-muted-foreground">2 hours ago</div>
-                  </div>
-                  <Badge variant="secondary" className="bg-green-100 text-green-800">Completed</Badge>
+            {/* Recent Activity */}
+            <Card className="premium-card theme-transition">
+              <CardHeader className="pb-4">
+                <div className="flex items-center space-x-2">
+                  <Clock className="w-5 h-5 text-primary" />
+                  <CardTitle className="text-lg">Recent Activity</CardTitle>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                  <div>
-                    <div className="font-medium text-sm">New lead from Tech Solutions Inc</div>
-                    <div className="text-xs text-muted-foreground">1 day ago</div>
-                  </div>
-                  <Badge variant="default">Lead Generated</Badge>
+                <CardDescription>Your latest actions and updates</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {recentActivities.map((activity, index) => (
+                    <div key={index} className="flex items-center space-x-4">
+                      <div className={`w-2 h-2 rounded-full ${
+                        activity.type === 'success' ? 'bg-green-500' :
+                        activity.type === 'warning' ? 'bg-yellow-500' :
+                        'bg-blue-500'
+                      }`} />
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-foreground">{activity.action}</p>
+                        <p className="text-xs text-muted-foreground">{activity.time}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                  <div>
-                    <div className="font-medium text-sm">Payment confirmed for Global Services</div>
-                    <div className="text-xs text-muted-foreground">3 days ago</div>
-                  </div>
-                  <Badge variant="secondary" className="bg-green-100 text-green-800">Payment Confirmed</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

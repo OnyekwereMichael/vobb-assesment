@@ -1,12 +1,14 @@
-import { Building2, Settings, User, Plus } from 'lucide-react';
+import { Building2, Settings, User, Plus, Sun, Moon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../ui/button';
+import { useTheme } from '../theme/ThemeProvider';
 
 export const Navbar = () => {
   const location = useLocation();
+  const { theme, setTheme } = useTheme();
 
   return (
-    <nav className="navbar h-16 flex items-center justify-between px-6">
+    <nav className="navbar h-16 flex items-center justify-between px-6 theme-transition">
       <div className="flex items-center space-x-8">
         {/* Logo */}
         <div className="flex items-center space-x-3">
@@ -55,9 +57,23 @@ export const Navbar = () => {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-3">
+        {/* Theme Toggle */}
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          className="theme-transition"
+        >
+          {theme === 'light' ? (
+            <Moon className="w-4 h-4" />
+          ) : (
+            <Sun className="w-4 h-4" />
+          )}
+        </Button>
+
         {/* Create Deals → navigates to /deals/create */}
-        <Button className="bg-primary hover:bg-primary-hover" asChild>
+        <Button className="theme-transition" asChild>
           <Link to="/deals/create">
             <Plus className="w-4 h-4 mr-2" />
             Create Deals
