@@ -1,10 +1,8 @@
 import { Building2, Settings, User, Plus } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../ui/button';
-import { useDealStore } from '../../store/dealStore';
 
 export const Navbar = () => {
-  const setCreateModalOpen = useDealStore((state) => state.setCreateModalOpen);
   const location = useLocation();
 
   return (
@@ -23,8 +21,8 @@ export const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="flex items-center space-x-6">
-          <Link 
-            to="/deals" 
+          <Link
+            to="/deals"
             className={`text-sm font-medium transition-colors ${
               location.pathname === '/' || location.pathname === '/deals'
                 ? 'text-primary border-b-2 border-primary pb-4 -mb-4'
@@ -33,8 +31,8 @@ export const Navbar = () => {
           >
             Deals
           </Link>
-          <Link 
-            to="/settings" 
+          <Link
+            to="/settings"
             className={`text-sm font-medium transition-colors ${
               location.pathname === '/settings'
                 ? 'text-primary border-b-2 border-primary pb-4 -mb-4'
@@ -43,8 +41,8 @@ export const Navbar = () => {
           >
             Settings
           </Link>
-          <Link 
-            to="/profile" 
+          <Link
+            to="/profile"
             className={`text-sm font-medium transition-colors ${
               location.pathname === '/profile'
                 ? 'text-primary border-b-2 border-primary pb-4 -mb-4'
@@ -58,20 +56,20 @@ export const Navbar = () => {
 
       {/* Actions */}
       <div className="flex items-center space-x-4">
-        <Button 
-          onClick={() => setCreateModalOpen(true)}
-          className="bg-primary hover:bg-primary-hover"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          New Deal
+        {/* Create Deals → navigates to /deals/create */}
+        <Button className="bg-primary hover:bg-primary-hover" asChild>
+          <Link to="/deals/create">
+            <Plus className="w-4 h-4 mr-2" />
+            Create Deals
+          </Link>
         </Button>
-        
+
         <Button variant="ghost" size="sm" asChild>
           <Link to="/settings">
             <Settings className="w-4 h-4" />
           </Link>
         </Button>
-        
+
         <Button variant="ghost" size="sm" asChild>
           <Link to="/profile">
             <User className="w-4 h-4" />

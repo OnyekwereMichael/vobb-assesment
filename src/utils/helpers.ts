@@ -1,13 +1,16 @@
 import { DealStage } from '@/types';
 
-export const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  }).format(date);
+export const formatDate = (date?: string | number | null) => {
+  if (!date) return "N/A"; // fallback when no date
+  const parsed = new Date(date);
+  if (isNaN(parsed.getTime())) return "Invalid Date"; // guard against bad values
+  return parsed.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 };
+
 
 export const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-US', {

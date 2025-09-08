@@ -22,7 +22,7 @@ import {
   PopoverTrigger,
 } from '../ui/popover';
 import { Checkbox } from '../ui/checkbox';
-import { useDealStore } from '../../store/dealStore';
+import { useDealStore } from '../../store/Store';
 import { Deal } from '../../types';
 import { formatDate, getStageColor } from '../../utils/helpers';
 

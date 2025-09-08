@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from '../ui/select';
 import { Textarea } from '../ui/textarea';
-import { useDealStore } from '../../store/dealStore';
+import { useDealStore } from '../../store/Store';
 import { DealFormData, DealStage } from '../../types';
 import { useToast } from '../../hooks/use-toast';
 
