@@ -1,13 +1,14 @@
 import { Table, Kanban, Filter, Search } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { useDealStore } from '../../store/Store';
-import { ViewMode } from '../../types';
+import { useMockDealStore } from '../../store/mockStore';
+import { useViewModeStore } from '../../store/Store';
 
 export const DashboardHeader = () => {
-  const { viewMode, setViewMode, deals } = useDealStore();
+  const { deals } = useMockDealStore();
+  const { viewMode, setViewMode } = useViewModeStore();
 
-  const handleViewChange = (mode: ViewMode) => {
+  const handleViewChange = (mode: "table" | "kanban") => {
     setViewMode(mode);
   };
 

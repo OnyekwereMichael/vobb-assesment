@@ -15,7 +15,8 @@ import {
   PopoverTrigger,
 } from '../ui/popover';
 import { Checkbox } from '../ui/checkbox';
-import { useDealStore } from '../../store/Store';
+import { useMockDealStore } from '../../store/mockStore';
+import { usePreferencesStore, useKanbanStore } from '../../store/Store';
 import { Deal, DealStage } from '../../types';
 import { formatDate, getStageBgColor } from '../../utils/helpers';
 
@@ -33,16 +34,19 @@ const STAGES: DealStage[] = [
 export const KanbanBoard = () => {
   const { 
     deals, 
-    preferences,
-    updatePreferences,
     updateDeal,
     deleteDeal,
     getDealsByStage,
     getClientById,
     getProductById 
-  } = useDealStore();
-
-  const { kanbanMetadata } = preferences;
+  } = useMockDealStore();
+  
+  const {
+    kanbanMetadata,
+    toggleKanbanMetadata
+  } = usePreferencesStore();
+  
+  const { moveItem } = useKanbanStore();
 
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId } = result;
@@ -57,12 +61,7 @@ export const KanbanBoard = () => {
   };
 
   const toggleMetadata = (key: keyof typeof kanbanMetadata) => {
-    updatePreferences({
-      kanbanMetadata: {
-        ...kanbanMetadata,
-        [key]: !kanbanMetadata[key],
-      },
-    });
+    toggleKanbanMetadata(key);
   };
 
   const handleDelete = (deal: Deal) => {

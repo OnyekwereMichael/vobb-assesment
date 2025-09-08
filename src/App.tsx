@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +11,9 @@ import { Settings } from "./pages/Settings";
 import { DealView } from "./pages/DealView";
 import  DealEdit  from "./pages/DealEdit";
 import CreateDeal from "./pages/CreateDeals";
+import { Login } from "./components/auth/Login";
+import { Signup } from "./components/auth/Signup";
+import { LandingPage } from "./components/landing/LandingPage";
 
 const queryClient = new QueryClient();
 
@@ -21,11 +24,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/dashboard" element={<Index />} />
           <Route path="/deals" element={<Index />} />
           <Route path="/deals/create" element={<CreateDeal />} />
           <Route path="/deals/:id" element={<DealView />} />
           <Route path="/deals/:id/edit" element={<DealEdit />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

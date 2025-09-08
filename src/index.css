@@ -18,10 +18,12 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 14% 11%;
 
-    /* Primary - Professional Blue */
-    --primary: 217 91% 60%;
+    /* Primary - Modern Blue Gradient */
+    --primary: 225 84% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 217 91% 55%;
+    --primary-hover: 225 84% 45%;
+    --primary-light: 225 84% 65%;
+    --primary-glow: 225 84% 70%;
 
     /* Secondary - Light Blue */
     --secondary: 217 32% 17%;
@@ -136,7 +138,7 @@
   }
 
   body {
-    @apply bg-dashboard-bg text-foreground font-sans antialiased;
+    @apply bg-dashboard-bg text-foreground font-lexend antialiased;
   }
 
   /* Custom scrollbar */

@@ -22,24 +22,26 @@ import {
   PopoverTrigger,
 } from '../ui/popover';
 import { Checkbox } from '../ui/checkbox';
-import { useDealStore } from '../../store/Store';
+import { useMockDealStore } from '../../store/mockStore';
+import { usePreferencesStore } from '../../store/Store';
 import { Deal } from '../../types';
 import { formatDate, getStageColor } from '../../utils/helpers';
 
 export const DealsTable = () => {
   const { 
     deals, 
-    preferences, 
-    updatePreferences, 
     deleteDeal,
     getClientById,
     getProductById 
-  } = useDealStore();
+  } = useMockDealStore();
+  
+  const {
+    tableColumns,
+    toggleTableColumn
+  } = usePreferencesStore();
 
   const [sortBy, setSortBy] = useState<keyof Deal>('createdDate');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-
-  const { tableColumns } = preferences;
 
   const sortedDeals = [...deals].sort((a, b) => {
     const aValue = a[sortBy];
@@ -61,12 +63,7 @@ export const DealsTable = () => {
   };
 
   const toggleColumn = (column: keyof typeof tableColumns) => {
-    updatePreferences({
-      tableColumns: {
-        ...tableColumns,
-        [column]: !tableColumns[column],
-      },
-    });
+    toggleTableColumn(column);
   };
 
   const handleDelete = (deal: Deal) => {

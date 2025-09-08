@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from '../ui/select';
 import { Textarea } from '../ui/textarea';
-import { useDealStore } from '../../store/Store';
+import { useMockDealStore } from '../../store/mockStore';
 import { DealFormData, DealStage } from '../../types';
 import { useToast } from '../../hooks/use-toast';
 
@@ -41,7 +41,7 @@ export const CreateDealModal = () => {
     clients, 
     products, 
     addDeal 
-  } = useDealStore();
+  } = useMockDealStore();
   
   const { toast } = useToast();
 
