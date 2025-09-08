@@ -3,7 +3,7 @@ import { DashboardHeader } from './DashboardHeader';
 import { DealsTable } from '../deals/DealsTable';
 import { KanbanBoard } from '../deals/KanbanBoard';
 import { CreateDealModal } from '../deals/CreateDealModal';
-import { useDealStore } from '../../store/dealStore';
+import { useDealStore } from '../../store/Store';
 import { mockApi } from '../../services/mockApi';
 import { useToast } from '../../hooks/use-toast';
 

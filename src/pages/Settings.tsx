@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Moon, Sun, Bell, Lock, User, Palette, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,30 +5,15 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { useDealStore } from '@/store/dealStore';
 
 export const Settings = () => {
-  const { preferences, updatePreferences } = useDealStore();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [notifications, setNotifications] = useState({
-    dealUpdates: true,
-    emailDigest: true,
-    mobileAlerts: false,
-    weeklyReport: true
-  });
-
-  const handleClearData = () => {
-    if (window.confirm('Are you sure you want to clear all preferences? This action cannot be undone.')) {
-      localStorage.removeItem('vobb-dashboard-preferences');
-      window.location.reload();
-    }
-  };
-
   return (
     <div className="container mx-auto px-6 py-8 max-w-4xl">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground">Settings</h1>
-        <p className="text-muted-foreground mt-1">Manage your application preferences and account settings</p>
+        <p className="text-muted-foreground mt-1">
+          Manage your application preferences and account settings
+        </p>
       </div>
 
       <div className="space-y-6">
@@ -48,20 +32,8 @@ export const Settings = () => {
             <div>
               <Label className="text-base font-medium mb-3 block">Default View Mode</Label>
               <div className="flex space-x-2">
-                <Button
-                  variant={preferences.viewMode === 'table' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => updatePreferences({ viewMode: 'table' })}
-                >
-                  Table View
-                </Button>
-                <Button
-                  variant={preferences.viewMode === 'kanban' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => updatePreferences({ viewMode: 'kanban' })}
-                >
-                  Kanban View
-                </Button>
+                <Button variant="default" size="sm">Table View</Button>
+                <Button variant="outline" size="sm">Kanban View</Button>
               </div>
             </div>
 
@@ -70,25 +42,22 @@ export const Settings = () => {
             <div>
               <Label className="text-base font-medium mb-3 block">Table Column Visibility</Label>
               <div className="grid grid-cols-2 gap-3">
-                {Object.entries(preferences.tableColumns).map(([key, visible]) => (
-                  <div key={key} className="flex items-center space-x-2">
-                    <Switch
-                      id={key}
-                      checked={visible}
-                      onCheckedChange={(checked) => {
-                        updatePreferences({
-                          tableColumns: {
-                            ...preferences.tableColumns,
-                            [key]: checked
-                          }
-                        });
-                      }}
-                    />
-                    <Label htmlFor={key} className="text-sm">
-                      {key.replace(/([A-Z])/g, ' $1').trim()}
-                    </Label>
-                  </div>
-                ))}
+                <div className="flex items-center space-x-2">
+                  <Switch checked />
+                  <Label className="text-sm">Client Name</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch checked />
+                  <Label className="text-sm">Product Name</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch />
+                  <Label className="text-sm">Stage</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch />
+                  <Label className="text-sm">Created Date</Label>
+                </div>
               </div>
             </div>
 
@@ -97,25 +66,22 @@ export const Settings = () => {
             <div>
               <Label className="text-base font-medium mb-3 block">Kanban Card Metadata</Label>
               <div className="grid grid-cols-2 gap-3">
-                {Object.entries(preferences.kanbanMetadata).map(([key, visible]) => (
-                  <div key={key} className="flex items-center space-x-2">
-                    <Switch
-                      id={key}
-                      checked={visible}
-                      onCheckedChange={(checked) => {
-                        updatePreferences({
-                          kanbanMetadata: {
-                            ...preferences.kanbanMetadata,
-                            [key]: checked
-                          }
-                        });
-                      }}
-                    />
-                    <Label htmlFor={key} className="text-sm">
-                      {key.replace(/show/g, '').replace(/([A-Z])/g, ' $1').trim()}
-                    </Label>
-                  </div>
-                ))}
+                <div className="flex items-center space-x-2">
+                  <Switch checked />
+                  <Label className="text-sm">Show Client</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch checked />
+                  <Label className="text-sm">Show Product</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch />
+                  <Label className="text-sm">Show Value</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch />
+                  <Label className="text-sm">Show Created Date</Label>
+                </div>
               </div>
             </div>
           </CardContent>
@@ -142,10 +108,7 @@ export const Settings = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Sun className="w-4 h-4" />
-                <Switch
-                  checked={isDarkMode}
-                  onCheckedChange={setIsDarkMode}
-                />
+                <Switch />
                 <Moon className="w-4 h-4" />
               </div>
             </div>
@@ -164,31 +127,46 @@ export const Settings = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {Object.entries(notifications).map(([key, enabled]) => (
-              <div key={key} className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label className="text-base">
-                    {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-                  </Label>
-                  <div className="text-sm text-muted-foreground">
-                    {key === 'dealUpdates' && 'Get notified when deals change status'}
-                    {key === 'emailDigest' && 'Receive daily email summaries'}
-                    {key === 'mobileAlerts' && 'Push notifications on mobile devices'}
-                    {key === 'weeklyReport' && 'Weekly performance reports'}
-                  </div>
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label className="text-base">Deal Updates</Label>
+                <div className="text-sm text-muted-foreground">
+                  Get notified when deals change status
                 </div>
-                <Switch
-                  checked={enabled}
-                  onCheckedChange={(checked) => {
-                    setNotifications(prev => ({ ...prev, [key]: checked }));
-                  }}
-                />
               </div>
-            ))}
+              <Switch checked />
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label className="text-base">Email Digest</Label>
+                <div className="text-sm text-muted-foreground">
+                  Receive daily email summaries
+                </div>
+              </div>
+              <Switch checked />
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label className="text-base">Mobile Alerts</Label>
+                <div className="text-sm text-muted-foreground">
+                  Push notifications on mobile devices
+                </div>
+              </div>
+              <Switch />
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label className="text-base">Weekly Report</Label>
+                <div className="text-sm text-muted-foreground">
+                  Weekly performance reports
+                </div>
+              </div>
+              <Switch checked />
+            </div>
           </CardContent>
         </Card>
 
-        {/* Account & Privacy */}
+        {/* Privacy & Security */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
@@ -233,7 +211,7 @@ export const Settings = () => {
                   Reset all dashboard preferences to default
                 </div>
               </div>
-              <Button variant="destructive" size="sm" onClick={handleClearData}>
+              <Button variant="destructive" size="sm">
                 Clear Data
               </Button>
             </div>
@@ -259,7 +237,9 @@ export const Settings = () => {
                   Your current account status and plan
                 </div>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-800">Active</Badge>
+              <Badge variant="secondary" className="bg-green-100 text-green-800">
+                Active
+              </Badge>
             </div>
             
             <Separator />

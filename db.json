@@ -1,0 +1,79 @@
+{
+  "products": {
+    "data": [
+      {
+        "id": 1,
+        "name": "Football"
+      },
+      {
+        "id": 2,
+        "name": "Basketball"
+      }
+    ]
+  },
+  "clients": {
+    "data": [
+      {
+        "id": "1",
+        "name": "John Doe"
+      },
+      {
+        "id": "2",
+        "name": "Jane Smith"
+      }
+    ]
+  },
+  "deals": [
+    {
+      "id": "526b",
+      "clientId": "2",
+      "productId": "1",
+      "stage": "Application Submitted",
+      "createdAt": "2025-09-05T19:14:51.064Z",
+      "value": 0
+    },
+    {
+      "id": "647c",
+      "clientId": "1",
+      "productId": "1",
+      "stage": "Contacted",
+      "createdAt": "2025-09-07T10:55:56.325Z"
+    }
+  ],
+  "stages": {
+    "data": [
+      {
+        "id": 1,
+        "name": "Lead Generated"
+      },
+      {
+        "id": 2,
+        "name": "Contacted"
+      },
+      {
+        "id": 3,
+        "name": "Application Submitted"
+      },
+      {
+        "id": 4,
+        "name": "Application Under Review"
+      },
+      {
+        "id": 5,
+        "name": "Deal Finalized"
+      },
+      {
+        "id": 6,
+        "name": "Payment Confirmed"
+      },
+      {
+        "id": 7,
+        "name": "Completed"
+      },
+      {
+        "id": 8,
+        "name": "Lost"
+      }
+    ]
+  }
+}

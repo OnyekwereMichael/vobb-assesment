@@ -1,7 +1,7 @@
 import { Table, Kanban, Filter, Search } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { useDealStore } from '../../store/dealStore';
+import { useDealStore } from '../../store/Store';
 import { ViewMode } from '../../types';
 
 export const DashboardHeader = () => {

@@ -9,7 +9,8 @@ import NotFound from "./pages/NotFound";
 import { Profile } from "./pages/Profile";
 import { Settings } from "./pages/Settings";
 import { DealView } from "./pages/DealView";
-import { DealEdit } from "./pages/DealEdit";
+import  DealEdit  from "./pages/DealEdit";
+import CreateDeal from "./pages/CreateDeals";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/deals" element={<Index />} />
+          <Route path="/deals/create" element={<CreateDeal />} />
           <Route path="/deals/:id" element={<DealView />} />
           <Route path="/deals/:id/edit" element={<DealEdit />} />
           <Route path="/profile" element={<Profile />} />
