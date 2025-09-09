@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -20,16 +20,29 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
+import { auth } from '../../src/components/Firebase/firebase';
+import { useState } from 'react';
+import { BackButton } from '@/components/Backbutton';
 import { useTheme } from '@/components/theme/ThemeProvider';
 
 export const Settings = () => {
   const { theme, setTheme } = useTheme();
+   const [userName, setUserName] = useState<string | null>(null);
+
+       // ✅ get logged in user
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user) {
+      setUserName(user.displayName || user.email); 
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-background theme-transition">
       {/* Header */}
       <div className="bg-background/95 backdrop-blur-sm border-b border-border/50 px-6 py-4">
         <div className="flex items-center space-x-3">
+          <BackButton />
           <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
             <SettingsIcon className="w-4 h-4 text-primary" />
           </div>
@@ -40,7 +53,21 @@ export const Settings = () => {
         </div>
       </div>
 
-      <div className="p-6 max-w-4xl mx-auto">
+      <div className="p-6  mx-auto">
+
+         <div className="px-6 pt-6">
+        <h2 className="text-lg font-semibold text-gray-800">
+       <p
+  className={`text-lg font-semibold mb-6 ${
+    theme === "dark" ? "text-white" : "text-gray-900"
+  }`}
+>
+ Name: {userName}
+</p>
+
+        </h2>
+      </div>
+
         <div className="grid gap-6">
           {/* Appearance */}
           <Card className="premium-card theme-transition">
@@ -100,9 +127,9 @@ export const Settings = () => {
                   </div>
                 </div>
 
-                <Separator />
+                {/* <Separator /> */}
 
-                <div className="space-y-3">
+                {/* <div className="space-y-3">
                   <Label className="text-sm font-medium">Table Columns</Label>
                   <div className="grid grid-cols-2 gap-3">
                     {[
@@ -117,11 +144,11 @@ export const Settings = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                </div> */}
 
-                <Separator />
+                {/* <Separator /> */}
 
-                <div className="space-y-3">
+                {/* <div className="space-y-3">
                   <Label className="text-sm font-medium">Kanban Card Metadata</Label>
                   <div className="grid grid-cols-2 gap-3">
                     {[
@@ -136,7 +163,7 @@ export const Settings = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                </div> */}
               </div>
             </CardContent>
           </Card>

@@ -15,6 +15,7 @@ import CreateDeal from "./pages/CreateDeals";
 import { Login } from "./components/auth/Login";
 import { Signup } from "./components/auth/Signup";
 import { LandingPage } from "./components/landing/LandingPage";
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 const queryClient = new QueryClient();
 
@@ -25,20 +26,35 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/dashboard" element={<Index />} />
-            <Route path="/deals" element={<Index />} />
-            <Route path="/deals/create" element={<CreateDeal />} />
-            <Route path="/deals/:id" element={<DealView />} />
-            <Route path="/deals/:id/edit" element={<DealEdit />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/settings" element={<Settings />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+      <Routes>
+  <Route path="/" element={<LandingPage />} />
+  <Route
+    path="/dashboard"
+    element={<ProtectedRoute element={<Index />} />}
+  />
+  <Route
+    path="/deals"
+    element={<ProtectedRoute element={<Index />} />}
+  />
+  <Route
+    path="/deals/create"
+    element={<ProtectedRoute element={<CreateDeal />} />}
+  />
+  <Route
+    path="/deals/:id"
+    element={<ProtectedRoute element={<DealView />} />}
+  />
+  <Route
+    path="/deals/:id/edit"
+    element={<ProtectedRoute element={<DealEdit />} />}
+  />
+  <Route path="/login" element={<Login />} />
+  <Route path="/signup" element={<Signup />} />
+  <Route path="/profile" element={<Profile />} />
+  <Route path="/settings" element={<Settings />} />
+  <Route path="*" element={<NotFound />} />
+</Routes>
+
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
