@@ -7,7 +7,7 @@
 - **Vite** - Fast development and optimized production builds
 - **Zustand** - Lightweight state management with persistence
 - **Tailwind CSS** - Utility-first styling with custom design system
-- **shadcn/ui** - High-quality, accessible UI components
+- **Radix UI** - High-quality, accessible UI components
 
 ### Key Dependencies
 - **@hello-pangea/dnd** - Drag-and-drop functionality for Kanban board
@@ -63,25 +63,18 @@
 
 ### Current Limitations
 
-1. **Search & Filtering**: 
-   - Search UI is present but not fully functional
-   - Filter dropdown needs implementation
-   - Could add advanced filtering by stage, date range, value
 
-2. **Real-time Collaboration**:
-   - No WebSocket integration for real-time updates
-   - Multiple users would need sync mechanisms
 
-3. **Data Pagination**:
+1. **Data Pagination**:
    - All data loads at once
    - Would need pagination for large datasets
    - Virtual scrolling for better performance
 
-4. **Offline Support**:
+2. **Offline Support**:
    - No PWA features or offline caching
    - Could implement service workers for offline functionality
 
-5. **Advanced Analytics**:
+3. **Advanced Analytics**:
    - Basic deal counting only
    - Could add charts, conversion rates, performance metrics
 
@@ -150,10 +143,7 @@
    - Advanced filters with multiple criteria
    - Saved search preferences
 
-4. **Export & Reporting**:
-   - CSV/Excel export functionality
-   - Customizable reports and analytics
-   - Pipeline performance metrics
+
 
 ## Architecture Highlights
 
@@ -186,15 +176,11 @@ components/
 ## Deployment Strategy
 
 ### Recommended Deployment
-1. **Vercel** (Preferred):
+1. **Vercel** :
    - Automatic deployments from Git
    - Built-in performance optimizations
    - Edge network distribution
 
-2. **Netlify** (Alternative):
-   - Simple drag-and-drop deployment
-   - Form handling capabilities
-   - Branch previews
 
 ### Production Checklist
 - [x] TypeScript compilation without errors

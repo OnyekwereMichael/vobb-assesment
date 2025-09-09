@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { toast } from "sonner";
@@ -57,7 +57,11 @@ const CreateDeal: React.FC = () => {
 
   if (clientsLoading || productsLoading || stageLoading) {
     return (
-      <div className={`flex justify-center items-center min-h-screen ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
+      <div
+        className={`flex justify-center items-center min-h-screen px-4 ${
+          theme === "dark" ? "bg-gray-900" : "bg-gray-50"
+        }`}
+      >
         <p className={`${theme === "dark" ? "text-gray-200" : "text-gray-500"}`}>
           Loading clients & products...
         </p>
@@ -66,25 +70,43 @@ const CreateDeal: React.FC = () => {
   }
 
   return (
-    <div className={`flex justify-center items-center min-h-screen px-3 sm:px-4 py-4 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      <div className={`w-full max-w-sm sm:max-w-lg rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-8 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
-        <h2 className={`text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center sm:text-left ${theme === "dark" ? "text-white" : "text-gray-800"}`}>
+    <div
+      className={`flex justify-center items-center min-h-screen px-4 ${
+        theme === "dark" ? "bg-gray-900" : "bg-gray-50"
+      }`}
+    >
+      <div
+        className={`w-full max-w-lg rounded-xl shadow-lg p-6 sm:p-8 ${
+          theme === "dark" ? "bg-gray-800" : "bg-white"
+        }`}
+      >
+        <h2
+          className={`text-xl sm:text-2xl font-bold mb-6 text-center sm:text-left ${
+            theme === "dark" ? "text-white" : "text-gray-800"
+          }`}
+        >
           Create New Deal
         </h2>
 
         <Formik initialValues={initialValues} validationSchema={dealSchema} onSubmit={handleSubmit}>
           {({ isSubmitting }) => (
-            <Form className="space-y-4 sm:space-y-6">
+            <Form className="space-y-5 sm:space-y-6">
               {/* Client */}
               <div>
-                <label className={`block text-sm font-medium mb-1 ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>
+                <label
+                  className={`block text-sm font-medium mb-1 ${
+                    theme === "dark" ? "text-gray-200" : "text-gray-700"
+                  }`}
+                >
                   Client
                 </label>
                 <Field
                   as="select"
                   name="clientId"
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-blue-500 focus:ring-blue-500 ${
-                    theme === "dark" ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-800"
+                  className={`w-full px-3 py-2 text-sm sm:text-base border rounded-lg focus:ring-2 focus:border-blue-500 focus:ring-blue-500 ${
+                    theme === "dark"
+                      ? "bg-gray-700 border-gray-600 text-gray-200"
+                      : "bg-white border-gray-300 text-gray-800"
                   }`}
                 >
                   <option value="">Select client</option>
@@ -94,19 +116,29 @@ const CreateDeal: React.FC = () => {
                     </option>
                   ))}
                 </Field>
-                <ErrorMessage name="clientId" component="p" className="text-sm text-red-500 mt-1" />
+                <ErrorMessage
+                  name="clientId"
+                  component="p"
+                  className="text-xs sm:text-sm text-red-500 mt-1"
+                />
               </div>
 
               {/* Product */}
               <div>
-                <label className={`block text-sm font-medium mb-1 ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>
+                <label
+                  className={`block text-sm font-medium mb-1 ${
+                    theme === "dark" ? "text-gray-200" : "text-gray-700"
+                  }`}
+                >
                   Product
                 </label>
                 <Field
                   as="select"
                   name="productId"
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-blue-500 focus:ring-blue-500 ${
-                    theme === "dark" ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-800"
+                  className={`w-full px-3 py-2 text-sm sm:text-base border rounded-lg focus:ring-2 focus:border-blue-500 focus:ring-blue-500 ${
+                    theme === "dark"
+                      ? "bg-gray-700 border-gray-600 text-gray-200"
+                      : "bg-white border-gray-300 text-gray-800"
                   }`}
                 >
                   <option value="">Select product</option>
@@ -116,19 +148,29 @@ const CreateDeal: React.FC = () => {
                     </option>
                   ))}
                 </Field>
-                <ErrorMessage name="productId" component="p" className="text-sm text-red-500 mt-1" />
+                <ErrorMessage
+                  name="productId"
+                  component="p"
+                  className="text-xs sm:text-sm text-red-500 mt-1"
+                />
               </div>
 
               {/* Stage */}
               <div>
-                <label className={`block text-sm font-medium mb-1 ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>
+                <label
+                  className={`block text-sm font-medium mb-1 ${
+                    theme === "dark" ? "text-gray-200" : "text-gray-700"
+                  }`}
+                >
                   Stage
                 </label>
                 <Field
                   as="select"
                   name="stage"
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-blue-500 focus:ring-blue-500 ${
-                    theme === "dark" ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-800"
+                  className={`w-full px-3 py-2 text-sm sm:text-base border rounded-lg focus:ring-2 focus:border-blue-500 focus:ring-blue-500 ${
+                    theme === "dark"
+                      ? "bg-gray-700 border-gray-600 text-gray-200"
+                      : "bg-white border-gray-300 text-gray-800"
                   }`}
                 >
                   {stages.map((s: { id: string | number; name: string }) => (
@@ -137,14 +179,18 @@ const CreateDeal: React.FC = () => {
                     </option>
                   ))}
                 </Field>
-                <ErrorMessage name="stage" component="p" className="text-sm text-red-500 mt-1" />
+                <ErrorMessage
+                  name="stage"
+                  component="p"
+                  className="text-xs sm:text-sm text-red-500 mt-1"
+                />
               </div>
 
               {/* Submit */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-3 font-semibold rounded-lg shadow transition-colors ${
+                className={`w-full py-2.5 sm:py-3 text-sm sm:text-base font-semibold rounded-lg shadow transition-colors ${
                   isSubmitting
                     ? "bg-blue-400 text-white cursor-not-allowed"
                     : "bg-blue-600 hover:bg-blue-700 text-white"

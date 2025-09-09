@@ -8,13 +8,14 @@ import {
 } from "@/lib/query";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { ErrorMessage, Field, Formik } from "formik";
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 const DealEdit = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   // ✅ fetch deal, clients, products, and stages
   const { data: deal, isLoading, isError } = useGetDealByDealId(id!);
@@ -45,6 +46,14 @@ const DealEdit = () => {
   if (isLoading) return <p className="p-6">Loading deal...</p>;
   if (isError || !deal) return <p className="p-6 text-red-500">Deal not found.</p>;
 
+  // ✅ theme-based select style
+  const selectClasses = `w-full px-3 py-2 rounded-lg border outline-none transition-colors
+    ${
+      theme === "dark"
+        ? "bg-gray-900 border-gray-700 text-gray-200 hover:bg-gray-800"
+        : "bg-white border-gray-300 text-gray-800 hover:bg-gray-50"
+    }`;
+
   return (
     <div className="p-6">
       <h2 className="text-xl font-bold mb-4">Edit Deal</h2>
@@ -67,10 +76,8 @@ const DealEdit = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* ✅ Client select */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Client
-              </label>
-              <Field as="select" name="clientId" className="w-full border p-2 rounded">
+              <label className="block text-sm font-medium mb-1">Client</label>
+              <Field as="select" name="clientId" className={selectClasses}>
                 <option value="">-- Select a client --</option>
                 {clients?.map((c: any) => (
                   <option key={c.id} value={c.id}>
@@ -78,15 +85,17 @@ const DealEdit = () => {
                   </option>
                 ))}
               </Field>
-              <ErrorMessage name="clientId" component="p" className="text-sm text-red-500 mt-1" />
+              <ErrorMessage
+                name="clientId"
+                component="p"
+                className="text-sm text-red-500 mt-1"
+              />
             </div>
 
             {/* ✅ Product select */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Product
-              </label>
-              <Field as="select" name="productId" className="w-full border p-2 rounded">
+              <label className="block text-sm font-medium mb-1">Product</label>
+              <Field as="select" name="productId" className={selectClasses}>
                 <option value="">-- Select a product --</option>
                 {products?.map((p: any) => (
                   <option key={p.id} value={p.id}>
@@ -94,15 +103,17 @@ const DealEdit = () => {
                   </option>
                 ))}
               </Field>
-              <ErrorMessage name="productId" component="p" className="text-sm text-red-500 mt-1" />
+              <ErrorMessage
+                name="productId"
+                component="p"
+                className="text-sm text-red-500 mt-1"
+              />
             </div>
 
             {/* ✅ Stage select */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Stage
-              </label>
-              <Field as="select" name="stage" className="w-full border p-2 rounded">
+              <label className="block text-sm font-medium mb-1">Stage</label>
+              <Field as="select" name="stage" className={selectClasses}>
                 <option value="">-- Select a stage --</option>
                 {stages?.map((s: any) => (
                   <option key={s.id} value={s.name}>
@@ -110,7 +121,11 @@ const DealEdit = () => {
                   </option>
                 ))}
               </Field>
-              <ErrorMessage name="stage" component="p" className="text-sm text-red-500 mt-1" />
+              <ErrorMessage
+                name="stage"
+                component="p"
+                className="text-sm text-red-500 mt-1"
+              />
             </div>
 
             <Button type="submit" disabled={updateDealMutation.isPending}>
