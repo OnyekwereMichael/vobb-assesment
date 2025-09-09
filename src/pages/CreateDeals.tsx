@@ -66,15 +66,15 @@ const CreateDeal: React.FC = () => {
   }
 
   return (
-    <div className={`flex justify-center items-center min-h-screen px-4 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
-      <div className={`w-full max-w-lg rounded-2xl shadow-xl p-8 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
-        <h2 className={`text-2xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-800"}`}>
+    <div className={`flex justify-center items-center min-h-screen px-3 sm:px-4 py-4 ${theme === "dark" ? "bg-gray-900" : "bg-gray-50"}`}>
+      <div className={`w-full max-w-sm sm:max-w-lg rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-8 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
+        <h2 className={`text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center sm:text-left ${theme === "dark" ? "text-white" : "text-gray-800"}`}>
           Create New Deal
         </h2>
 
         <Formik initialValues={initialValues} validationSchema={dealSchema} onSubmit={handleSubmit}>
           {({ isSubmitting }) => (
-            <Form className="space-y-6">
+            <Form className="space-y-4 sm:space-y-6">
               {/* Client */}
               <div>
                 <label className={`block text-sm font-medium mb-1 ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>

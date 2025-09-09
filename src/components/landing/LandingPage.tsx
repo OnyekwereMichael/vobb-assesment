@@ -78,19 +78,19 @@ export const LandingPage = () => {
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Building2 className="w-5 h-5 text-primary-foreground" />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center">
+                <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-xl font-bold">Vobb</h1>
-                <p className="text-xs text-muted-foreground">Deal Management</p>
+                <h1 className="text-lg sm:text-xl font-bold">Vobb</h1>
+                <p className="text-xs text-muted-foreground hidden sm:block">Deal Management</p>
               </div>
             </div>
             
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-8">
               <Link to="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Features
               </Link>
@@ -102,11 +102,11 @@ export const LandingPage = () => {
               </Link>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" asChild>
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <Button variant="ghost" size="sm" className="text-xs sm:text-sm px-2 sm:px-3" asChild>
                 <Link to="/login">Sign In</Link>
               </Button>
-              <Button size="sm" asChild>
+              <Button size="sm" className="text-xs sm:text-sm px-2 sm:px-4" asChild>
                 <Link to="/signup">Get Started</Link>
               </Button>
             </div>
@@ -116,57 +116,57 @@ export const LandingPage = () => {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-16 lg:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
               <div className="space-y-4">
-                <Badge className="bg-primary/10 text-primary border-primary/20">
+                <Badge className="bg-primary/10 text-primary border-primary/20 text-xs sm:text-sm">
                   Atlas Module • Deal Management Platform
                 </Badge>
-                <h1 className="text-4xl lg:text-4xl font-bold leading-tight">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
                   Manage Deals Like a
                   <span className="text-primary"> Pro</span>
                 </h1>
-                <p className="text-xl text-muted-foreground leading-relaxed">
+                <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
                   Transform your sales process with our powerful deal management platform. 
                   Track, manage, and close deals faster with advanced Kanban boards, 
                   analytics, and team collaboration features.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="h-14 px-8 text-base font-semibold" asChild>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <Button size="lg" className="h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-semibold" asChild>
                   <Link to="/signup">
                     Start Free Trial
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg" className="h-14 px-8 text-base font-semibold" asChild>
+                <Button variant="outline" size="lg" className="h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-semibold" asChild>
                   <Link to="/deals">
                     View Demo Dashboard
                   </Link>
                 </Button>
               </div>
 
-              <div className="grid grid-cols-4 gap-6 pt-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 pt-6 sm:pt-8">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-2xl lg:text-3xl font-bold text-primary">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary">{stat.value}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="relative">
+            <div className="relative order-first lg:order-last">
               <div className="relative z-10">
                 <img 
                   src={heroImage} 
                   alt="Vobb Dashboard Interface"
-                  className="rounded-2xl shadow-2xl border border-border"
+                  className="rounded-xl sm:rounded-2xl shadow-2xl border border-border w-full h-auto"
                 />
               </div>
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-3xl blur-2xl -z-10"></div>
+              <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-primary/20 to-primary-light/20 rounded-2xl sm:rounded-3xl blur-2xl -z-10"></div>
             </div>
           </div>
         </div>

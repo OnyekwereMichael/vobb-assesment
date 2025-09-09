@@ -160,61 +160,62 @@ const Index = () => {
       </div>
 
       {/* Dashboard Header */}
-      <div className="flex items-center justify-between p-6 bg-card border-b border-border">
-        <div>
-          <h2 className="text-2xl font-bold">Deal Management</h2>
-          <p className="text-muted-foreground">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between p-3 sm:p-6 bg-card border-b border-border space-y-4 lg:space-y-0">
+        <div className="text-center lg:text-left">
+          <h2 className="text-xl sm:text-2xl font-bold">Deal Management</h2>
+          <p className="text-sm sm:text-base text-muted-foreground">
             Manage your sales pipeline • {deals.length} active deals
           </p>
         </div>
 
-        <div className="flex items-center space-x-4">
-          <Input
-            placeholder="Search deals..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-64"
-          />
-
-           {searchQuery !== debouncedQuery && (
-      <div className="absolute right-3 top-1/2 -translate-y-1/2">
-        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
-      </div>
-)}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
+          <div className="relative">
+            <Input
+              placeholder="Search deals..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full sm:w-48 lg:w-64"
+            />
+            {searchQuery !== debouncedQuery && (
+              <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+              </div>
+            )}
+          </div>
 
           <div className="flex rounded-lg border border-border p-1 bg-muted">
             <Button
               variant={viewMode === 'table' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => setViewMode('table')}
-              className={viewMode === 'table' ? `bg-card shadow-sm text-black ${theme === 'dark' ? 'text-white' : 'text-black'}` : 'text-black'}
+              className={`flex-1 sm:flex-none ${viewMode === 'table' ? `bg-card shadow-sm ${theme === 'dark' ? 'text-white' : 'text-black'}` : theme === 'dark' ? 'text-white' : 'text-black'}`}
             >
-              <TableIcon className="w-4 h-4 mr-2" />
-              Table
+              <TableIcon className="w-4 h-4 mr-1 sm:mr-2" />
+              <span className="text-xs sm:text-sm">Table</span>
             </Button>
             <Button
               variant={viewMode === 'kanban' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => setViewMode('kanban')}
-              className={viewMode === 'kanban' ? `bg-card shadow-sm text-black ${theme === 'dark' ? 'text-white' : 'text-black'}` : 'text-black'}
+              className={`flex-1 sm:flex-none ${viewMode === 'kanban' ? `bg-card shadow-sm ${theme === 'dark' ? 'text-white' : 'text-black'}` : theme === 'dark' ? 'text-white' : 'text-black'}`}
             >
-              <Kanban className="w-4 h-4 mr-2" />
-              Kanban
+              <Kanban className="w-4 h-4 mr-1 sm:mr-2" />
+              <span className="text-xs sm:text-sm">Kanban</span>
             </Button>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="p-6">
+      <div className="p-3 sm:p-6">
         {viewMode === 'table' ? (
           <div>
             <h3 className="text-lg font-semibold mb-4">Deals Overview</h3>
 
             {/* Table Preferences */}
-            <div className="flex space-x-4 mb-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4 mb-4">
               {Object.keys(tableColumns).map((col) => (
-                <label key={col} className="flex items-center space-x-2 text-sm">
+                <label key={col} className="flex items-center space-x-2 text-xs sm:text-sm">
                   <Checkbox
                     checked={tableColumns[col]}
                     onCheckedChange={() => toggleTableColumn(col)}
@@ -225,65 +226,67 @@ const Index = () => {
             </div>
 
             <Card className="overflow-hidden">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-muted/50">
-                    {tableColumns.clientName && <TableHead>Client Name</TableHead>}
-                    {tableColumns.productName && <TableHead>Product Name</TableHead>}
-                    {tableColumns.stage && <TableHead>Deal Stage</TableHead>}
-                    {tableColumns.createdAt && <TableHead>Created Date</TableHead>}
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredDeals.map((deal) => {
-                    const client = getClientById(deal.clientId);
-                    const product = getProductById(deal.productId);
-                    return (
-                      <TableRow key={deal.id} className="hover:bg-muted/30">
-                        {tableColumns.clientName && <TableCell className="font-medium">{client?.name}</TableCell>}
-                        {tableColumns.productName && <TableCell>{product?.name}</TableCell>}
-                        {tableColumns.stage && (
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-muted/50">
+                      {tableColumns.clientName && <TableHead className="min-w-[120px]">Client Name</TableHead>}
+                      {tableColumns.productName && <TableHead className="min-w-[150px]">Product Name</TableHead>}
+                      {tableColumns.stage && <TableHead className="min-w-[140px]">Deal Stage</TableHead>}
+                      {tableColumns.createdAt && <TableHead className="min-w-[120px]">Created Date</TableHead>}
+                      <TableHead className="min-w-[80px]">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredDeals.map((deal) => {
+                      const client = getClientById(deal.clientId);
+                      const product = getProductById(deal.productId);
+                      return (
+                        <TableRow key={deal.id} className="hover:bg-muted/30">
+                          {tableColumns.clientName && <TableCell className="font-medium text-xs sm:text-sm">{client?.name}</TableCell>}
+                          {tableColumns.productName && <TableCell className="text-xs sm:text-sm">{product?.name}</TableCell>}
+                          {tableColumns.stage && (
+                            <TableCell>
+                              <Badge className={`${getStageColor(deal.stage)} text-xs`}>{deal.stage}</Badge>
+                            </TableCell>
+                          )}
+                          {tableColumns.createdAt && <TableCell className="text-xs sm:text-sm">{formatToShortDate(deal.createdAt)}</TableCell>}
                           <TableCell>
-                            <Badge className={getStageColor(deal.stage)}>{deal.stage}</Badge>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="sm">
+                                  <MoreHorizontal className="h-4 w-4" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuItem onClick={() => navigate(`/deals/${deal.id}`)}>
+                                  <Eye className="mr-2 h-4 w-4" />View
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => navigate(`/deals/${deal.id}/edit`)}>
+                                  <Edit className="mr-2 h-4 w-4" /> Edit
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => handleDelete(deal.id)}>
+                                  <Trash2 className="mr-2 h-4 w-4" />Delete
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </TableCell>
-                        )}
-                        {tableColumns.createdAt && <TableCell>{formatToShortDate(deal.createdAt)}</TableCell>}
-                        <TableCell>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm">
-                                <MoreHorizontal className="h-4 w-4" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                              <DropdownMenuItem onClick={() => navigate(`/deals/${deal.id}`)}>
-                                <Eye className="mr-2 h-4 w-4" />View
-                              </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => navigate(`/deals/${deal.id}/edit`)}>
-                                <Edit className="mr-2 h-4 w-4" /> Edit
-                              </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handleDelete(deal.id)}>
-                                <Trash2 className="mr-2 h-4 w-4" />Delete
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </div>
             </Card>
           </div>
         ) : (
           <div>
-            <h3 className="text-lg font-semibold mb-6">Pipeline Overview</h3>
+            <h3 className="text-lg font-semibold mb-4 sm:mb-6">Pipeline Overview</h3>
 
             {/* Kanban Preferences */}
-            <div className="flex space-x-4 mb-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4 mb-4">
               {Object.keys(kanbanMetadata).map((meta) => (
-                <label key={meta} className="flex items-center space-x-2 text-sm">
+                <label key={meta} className="flex items-center space-x-2 text-xs sm:text-sm">
                   <Checkbox
                     checked={kanbanMetadata[meta]}
                     onCheckedChange={() => toggleKanbanMetadata(meta)}
@@ -295,18 +298,22 @@ const Index = () => {
 
             {/* Kanban */}
             <DragDropContext onDragEnd={onDragEnd}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 overflow-x-auto">
                 {stages.map((stage) => {
                   const stageDeals = filteredDeals.filter((deal) => deal.stage === stage);
                   return (
                     <Droppable droppableId={stage} key={stage}>
                       {(provided) => (
-                        <Card ref={provided.innerRef} {...provided.droppableProps} className="p-4 min-h-[400px]">
-                          <div className="flex items-center justify-between mb-4">
-                            <h4 className="font-semibold text-sm">{stage}</h4>
-                            <Badge variant="outline">{stageDeals.length}</Badge>
+                        <Card 
+                          ref={provided.innerRef} 
+                          {...provided.droppableProps} 
+                          className="p-3 sm:p-4 min-h-[350px] sm:min-h-[400px] w-full min-w-[250px] sm:min-w-[280px]"
+                        >
+                          <div className="flex items-center justify-between mb-3 sm:mb-4">
+                            <h4 className="font-semibold text-xs sm:text-sm truncate">{stage}</h4>
+                            <Badge variant="outline" className="text-xs">{stageDeals.length}</Badge>
                           </div>
-                          <div className="space-y-3">
+                          <div className="space-y-2 sm:space-y-3">
                             {stageDeals.map((deal, index) => {
                               const client = getClientById(deal.clientId);
                               const product = getProductById(deal.productId);
@@ -317,19 +324,19 @@ const Index = () => {
                                       ref={provided.innerRef}
                                       {...provided.draggableProps}
                                       {...provided.dragHandleProps}
-                                      className="p-3 hover:shadow-md transition-shadow cursor-move"
+                                      className="p-2 sm:p-3 hover:shadow-md transition-shadow cursor-move"
                                     >
-                                      <div className="flex justify-between mb-2">
+                                      <div className="flex justify-between items-start mb-2">
                                         {kanbanMetadata.clientName && (
-                                          <h5 className="font-semibold text-sm">{client?.name}</h5>
+                                          <h5 className="font-semibold text-xs sm:text-sm truncate flex-1 mr-2">{client?.name}</h5>
                                         )}
                                         <DropdownMenu>
                                           <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" size="sm">
+                                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
                                               <MoreHorizontal className="h-3 w-3" />
                                             </Button>
                                           </DropdownMenuTrigger>
-                                          <DropdownMenuContent>
+                                          <DropdownMenuContent align="end">
                                             <DropdownMenuItem onClick={() => navigate(`/deals/${deal.id}`)}>
                                               <Eye className="mr-2 h-4 w-4" />View
                                             </DropdownMenuItem>
@@ -343,10 +350,10 @@ const Index = () => {
                                         </DropdownMenu>
                                       </div>
                                       {kanbanMetadata.productName && (
-                                        <p className="text-xs text-muted-foreground">{product?.name}</p>
+                                        <p className="text-xs text-muted-foreground truncate mb-1">{product?.name}</p>
                                       )}
                                       {kanbanMetadata.createdAt && (
-                                        <p className="text-sm font-semibold text-primary mt-2">{formatToShortDate(deal.createdAt)}</p>
+                                        <p className="text-xs font-semibold text-primary">{formatToShortDate(deal.createdAt)}</p>
                                       )}
                                     </Card>
                                   )}
