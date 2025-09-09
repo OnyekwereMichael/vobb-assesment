@@ -126,47 +126,47 @@ export const Profile = () => {
 </div>
 
 
-      <div className="p-6 mx-auto">
-        <div className="grid gap-6 lg:grid-cols-3">
+      <div className="p-3 sm:p-6 mx-auto">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
           {/* Profile Info */}
           <div className="lg:col-span-1">
             <Card className="premium-card theme-transition">
-              <CardHeader className="text-center pb-4">
-                <Avatar className="w-24 h-24 mx-auto mb-4">
+              <CardHeader className="text-center pb-3 sm:pb-4">
+                <Avatar className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-3 sm:mb-4">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="text-2xl bg-primary/10 text-primary">
+                  <AvatarFallback className="text-lg sm:text-xl lg:text-2xl bg-primary/10 text-primary">
                     {user.name
                       .split(" ")
                       .map((n: string) => n[0])
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
-                <CardTitle className="text-xl">{user.name}</CardTitle>
-                <CardDescription className="text-sm">{user.role}</CardDescription>
-                <Badge variant="secondary" className="mt-2">
+                <CardTitle className="text-lg sm:text-xl">{user.name}</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">{user.role}</CardDescription>
+                <Badge variant="secondary" className="mt-2 text-xs">
                   Active
                 </Badge>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3 text-sm">
-                    <Mail className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-foreground">{user.email}</span>
+              <CardContent className="space-y-3 sm:space-y-4">
+                <div className="space-y-2 sm:space-y-3">
+                  <div className="flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm">
+                    <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground flex-shrink-0" />
+                    <span className="text-foreground truncate">{user.email}</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-sm">
-                    <Phone className="w-4 h-4 text-muted-foreground" />
+                  <div className="flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm">
+                    <Phone className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground flex-shrink-0" />
                     <span className="text-foreground">{user.phone}</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-sm">
-                    <Building className="w-4 h-4 text-muted-foreground" />
+                  <div className="flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm">
+                    <Building className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground flex-shrink-0" />
                     <span className="text-foreground">{user.company}</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-sm">
-                    <MapPin className="w-4 h-4 text-muted-foreground" />
+                  <div className="flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm">
+                    <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground flex-shrink-0" />
                     <span className="text-foreground">{user.location}</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-sm">
-                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                  <div className="flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground flex-shrink-0" />
                     <span className="text-foreground">Joined {user.joinDate}</span>
                   </div>
                 </div>
@@ -175,42 +175,42 @@ export const Profile = () => {
           </div>
 
           {/* Performance & Activity */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             {/* Performance Overview */}
             <Card className="premium-card theme-transition">
-              <CardHeader className="pb-4">
+              <CardHeader className="pb-3 sm:pb-4">
                 <div className="flex items-center space-x-2">
-                  <TrendingUp className="w-5 h-5 text-primary" />
-                  <CardTitle className="text-lg">Performance Overview</CardTitle>
+                  <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  <CardTitle className="text-base sm:text-lg">Performance Overview</CardTitle>
                 </div>
-                <CardDescription>Your sales performance metrics</CardDescription>
+                <CardDescription className="text-sm">Your sales performance metrics</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="text-center p-4 bg-muted/30 rounded-xl">
-                    <Target className="w-8 h-8 text-primary mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-foreground">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="text-center p-3 sm:p-4 bg-muted/30 rounded-xl">
+                    <Target className="w-6 h-6 sm:w-8 sm:h-8 text-primary mx-auto mb-2" />
+                    <div className="text-lg sm:text-2xl font-bold text-foreground">
                       {user.stats.totalDeals}
                     </div>
                     <div className="text-xs text-muted-foreground">Total Deals</div>
                   </div>
-                  <div className="text-center p-4 bg-muted/30 rounded-xl">
-                    <Award className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-foreground">
+                  <div className="text-center p-3 sm:p-4 bg-muted/30 rounded-xl">
+                    <Award className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 mx-auto mb-2" />
+                    <div className="text-lg sm:text-2xl font-bold text-foreground">
                       {user.stats.completedDeals}
                     </div>
                     <div className="text-xs text-muted-foreground">Completed</div>
                   </div>
-                  <div className="text-center p-4 bg-muted/30 rounded-xl">
-                    <TrendingUp className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-foreground">
+                  <div className="text-center p-3 sm:p-4 bg-muted/30 rounded-xl">
+                    <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 mx-auto mb-2" />
+                    <div className="text-lg sm:text-2xl font-bold text-foreground">
                       {user.stats.winRate}%
                     </div>
                     <div className="text-xs text-muted-foreground">Win Rate</div>
                   </div>
-                  <div className="text-center p-4 bg-muted/30 rounded-xl">
-                    <DollarSign className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-foreground">
+                  <div className="text-center p-3 sm:p-4 bg-muted/30 rounded-xl">
+                    <DollarSign className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 mx-auto mb-2" />
+                    <div className="text-lg sm:text-2xl font-bold text-foreground">
                       ${(user.stats.totalValue / 1000000).toFixed(1)}M
                     </div>
                     <div className="text-xs text-muted-foreground">Total Value</div>
@@ -221,12 +221,12 @@ export const Profile = () => {
 
             {/* Recent Activity */}
             <Card className="premium-card theme-transition">
-              <CardHeader className="pb-4">
+              <CardHeader className="pb-3 sm:pb-4">
                 <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-primary" />
-                  <CardTitle className="text-lg">Recent Activity</CardTitle>
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  <CardTitle className="text-base sm:text-lg">Recent Activity</CardTitle>
                 </div>
-                <CardDescription>Your latest actions and updates</CardDescription>
+                <CardDescription className="text-sm">Your latest actions and updates</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">No recent activities yet.</p>
