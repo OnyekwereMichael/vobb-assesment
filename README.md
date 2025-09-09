@@ -1,251 +1,144 @@
-# Vobb Deal Management Dashboard (Atlas Module)
+Table of Contents
 
-A professional, feature-rich deal management dashboard built for Vobb's frontend engineering assessment. This application provides comprehensive deal pipeline management with both table and Kanban views.
+Overview
 
-## 🚀 Features
+Features
 
-### Core Functionality
-- **Dual View Modes**: Switch between table and Kanban views
-- **Deal Management**: Create, view, edit, and delete deals
-- **Drag & Drop**: Move deals between pipeline stages in Kanban view
-- **User Preferences**: Persistent column visibility and card metadata settings
-- **Real-time Updates**: All views update dynamically without page refresh
+Tech Stack
 
-### Navigation & UI
-- Clean, professional navigation bar
-- Responsive design for desktop and mobile
-- Modern SaaS-style interface with Tailwind CSS
-- Professional color scheme and animations
+Installation
 
-### State Management
-- Zustand for centralized state management
-- Persistent user preferences in localStorage
-- Optimistic UI updates
+Usage
 
-### Mock API Integration
-- Simulated API calls with loading states
-- Mock data for deals, clients, and products
-- Error handling and toast notifications
+Project Structure
 
-## 🛠️ Tech Stack
+Future Improvements
 
-- **Frontend Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **State Management**: Zustand
-- **Styling**: Tailwind CSS with custom design system
-- **UI Components**: shadcn/ui
-- **Drag & Drop**: @hello-pangea/dnd
-- **Routing**: React Router DOM
-- **Testing**: Vitest + React Testing Library
-- **Mock API**: Custom mock service (json-server ready)
+License
 
-## 📦 Installation & Setup
+Overview
 
-### Prerequisites
-- Node.js 18+ and npm
+This platform enables teams to:
 
-### Quick Start
+Manage client data, products, and deals in one place
 
-```bash
-# Clone the repository
-git clone <repository-url>
-cd vobb-deal-dashboard
+Track deals through multiple stages using Kanban boards
 
-# Install dependencies
+Visualize performance metrics with dashboards
+
+Add, edit, and delete deals with ease
+
+Access responsive views optimized for desktop, tablet, and mobile
+
+Authenticate users with Firebase Auth
+
+Maintain consistent theming (light & dark modes) across the app
+
+It integrates modern UI components with advanced features like drag-and-drop Kanban, customizable tables, real-time search filtering, and notifications.
+
+Features
+Core Features
+
+User Authentication: Firebase Authentication for login, logout, and profile management
+
+Deals CRUD: Create, update, and delete deals with live data
+
+Kanban View: Drag-and-drop deal stages, fully interactive
+
+Table View: Customizable columns and filtering
+
+Responsive Design: Mobile-first design using Tailwind CSS and Material UI components
+
+Profile Management: View and edit profile info including avatar, role, and stats
+
+Notifications: Real-time toast alerts for actions like creating, updating, or deleting deals
+
+
+UI/UX Enhancements
+
+Light and Dark themes with seamless transitions
+
+Modern design with Cards, Badges, Avatars, and Tables
+
+Hero sections and onboarding visuals
+
+Interactive components such as dropdown menus, modals, and buttons
+
+Tech Stack
+
+Frontend: React, Next.js (App Router), TypeScript (optional)
+
+Styling: Tailwind CSS, Material UI (MUI v5), Lucide Icons
+
+State Management: Zustand (Kanban & Preferences stores)
+
+Backend / Data Fetching: Firebase Auth, Json-Server, React Query
+
+Utilities: Formik + Yup (forms & validation), Sonner (notifications)
+
+Testing: Vitest for unit testing
+
+Installation
+
+Clone the repository:
+
+git clone https://github.com/OnyekwereMichael/vobb-assesment.git
+
+
+Install dependencies:
+
 npm install
+# or
+yarn install
 
-# Start development server
+
+
+
+Run the project locally:
+
 npm run dev
-```
+# or
+yarn dev
 
-The application will be available at `http://localhost:8080`
+Usage
 
-### Available Scripts
+Navigate to / to view the landing page
 
-```bash
-# Development
-npm run dev          # Start dev server with hot reload
+After login, access the Dashboard to view deals
 
-# Build & Preview
-npm run build        # Build for production
-npm run preview      # Preview production build
+Switch between Table View and Kanban View
 
-# Testing
-npm run test         # Run unit tests
-npm run test:ui      # Run tests with UI
-npm run test:coverage # Generate coverage report
+Add, edit, or delete deals
 
-# Linting
-npm run lint         # Check code quality
-```
+Track performance metrics in the Profile section
 
-## 🏗️ Project Structure
+Toggle themes via the theme switcher
 
-```
+Project Structure
 src/
 ├── components/
-│   ├── dashboard/         # Dashboard layout components
-│   ├── deals/            # Deal-specific components
-│   ├── layout/           # Navigation and layout
-│   └── ui/               # Reusable UI components (shadcn)
-├── hooks/                # Custom React hooks
-├── pages/                # Route components
-├── services/             # API and data services
-├── store/                # Zustand state management
-├── types/                # TypeScript type definitions
-└── utils/                # Utility functions
-```
+│   ├── ui/           # Reusable UI components (Card, Button, Table, Avatar)
+│   ├── layout/       # Navbar, Sidebar, Footer
+│   └── theme/        # Theme provider and context
+├── pages/            # Next.js pages
+├── lib/
+│   ├── query/        # React Query hooks for data fetching
+│   └── utils/        # Utility functions
+├── store/            # Zustand stores (Kanban, Preferences, ViewMode)
+└── firebase/         # Firebase configuration and auth
 
-## 🎯 Key Features Implementation
+Future Improvements
 
-### 1. Deal Dashboard Views
+Real-time updates with Firestore listeners
 
-**Table View:**
-- Sortable columns (Client Name, Product Name, Deal Stage, Created Date)
-- Column visibility toggles with persistence
-- Action dropdown for each deal (View/Edit/Delete)
-- Professional data presentation
+Team-based access and roles
 
-**Kanban View:**
-- 8 pipeline stages from Lead Generated to Completed/Lost
-- Drag-and-drop functionality between stages
-- Card metadata visibility controls
-- Stage-specific color coding
+Advanced analytics and charting dashboards
 
-### 2. Deal Creation
-- Modal form with validation
-- Client and Product dropdowns (populated from mock API)
-- Stage selection with default "Lead Generated"
-- Optional deal value and notes
-- Real-time form validation
+Email notifications and alerts
 
-### 3. State Management Features
-- Persistent user preferences (localStorage)
-- Optimistic UI updates
-- Loading and error states
-- Data normalization and relationships
+Integration with external CRMs or ERP systems
 
-### 4. User Experience
-- Toast notifications for actions
-- Loading spinners for async operations
-- Confirmation dialogs for destructive actions
-- Responsive design for all screen sizes
-- Professional animations and transitions
+License
 
-## 📊 Mock Data
-
-The application includes comprehensive mock data:
-- **5 Clients**: Various company types and contact information
-- **5 Products**: Different software solutions with pricing
-- **8 Sample Deals**: Representing all pipeline stages
-- **Realistic Relationships**: Connected clients, products, and deals
-
-## 🧪 Testing Strategy
-
-### Component Testing
-- Unit tests for all major components
-- Integration tests for user workflows
-- Mock store and API interactions
-
-### Test Coverage
-- Deal creation flow
-- View switching functionality
-- Drag and drop operations
-- User preference persistence
-- Error handling scenarios
-
-## 🎨 Design System
-
-### Colors
-- Professional blue primary palette
-- Semantic color tokens for different states
-- Consistent spacing and typography
-- Stage-specific color coding for Kanban
-
-### Components
-- Fully customized shadcn/ui components
-- Consistent design language
-- Accessible and responsive design
-- Professional hover states and animations
-
-## 🚀 Production Deployment
-
-### Build for Production
-```bash
-npm run build
-```
-
-### Deployment Options
-- **Vercel**: Connect GitHub repository for automatic deployments
-- **Netlify**: Drag and drop build folder or GitHub integration
-- **Other Platforms**: Any static hosting service
-
-### Environment Configuration
-- No environment variables required
-- All configuration built into the application
-- Mock data included for immediate functionality
-
-## 🔄 API Integration
-
-The application is designed to easily integrate with a real API:
-
-### Endpoints Structure
-```
-GET    /api/deals          # List all deals
-POST   /api/deals          # Create new deal
-PUT    /api/deals/:id      # Update deal
-DELETE /api/deals/:id      # Delete deal
-GET    /api/clients        # List all clients
-GET    /api/products       # List all products
-```
-
-### Mock API Service
-- Located in `src/services/mockApi.ts`
-- Simulates network delays and responses
-- Easy to replace with real API calls
-- Includes error handling patterns
-
-## 📈 Performance Features
-
-- **Code Splitting**: Automatic route-based splitting with Vite
-- **Tree Shaking**: Unused code elimination
-- **Bundle Optimization**: Minimal dependencies and optimized build
-- **Lazy Loading**: Dynamic imports for better performance
-- **Optimistic Updates**: Immediate UI feedback for better UX
-
-## 🛠️ Development Notes
-
-### Code Quality
-- TypeScript for type safety
-- ESLint for code quality
-- Consistent code formatting
-- Component-based architecture
-
-### State Management Philosophy
-- Centralized state with Zustand
-- Persistent user preferences
-- Optimistic UI updates
-- Clean separation of concerns
-
-### Styling Approach
-- Design system with semantic tokens
-- No hardcoded colors or sizes
-- Consistent spacing and typography
-- Responsive-first design
-
-## 🎯 Assessment Criteria Coverage
-
-✅ **Tech Stack**: React + TypeScript + Vite + Zustand  
-✅ **Features**: All required features implemented  
-✅ **Views**: Table and Kanban with persistence  
-✅ **CRUD Operations**: Create, Read, Update, Delete  
-✅ **State Management**: Zustand with persistence  
-✅ **Mock API**: Comprehensive mock service  
-✅ **Styling**: Professional UI with Tailwind CSS  
-✅ **Testing**: Unit and integration tests  
-✅ **Documentation**: Complete setup and usage docs  
-✅ **Responsive Design**: Desktop and mobile support  
-
-## 📝 License
-
-This project is built for Vobb's frontend engineering assessment.
+This project is MIT licensed.
