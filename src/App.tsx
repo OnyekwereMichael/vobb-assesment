@@ -21,7 +21,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme="light" storageKey="vobb-ui-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="vobb-ui-theme">
       <TooltipProvider>
         <Toaster />
         <Sonner />

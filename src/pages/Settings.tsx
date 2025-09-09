@@ -40,18 +40,25 @@ export const Settings = () => {
   return (
     <div className="min-h-screen bg-background theme-transition">
       {/* Header */}
-      <div className="bg-background/95 backdrop-blur-sm border-b border-border/50 px-6 py-4">
-        <div className="flex items-center space-x-3">
-          <BackButton />
-          <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-            <SettingsIcon className="w-4 h-4 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">Settings</h1>
-            <p className="text-sm text-muted-foreground">Manage your account and application preferences</p>
-          </div>
-        </div>
-      </div>
+     <div className="bg-background/95 backdrop-blur-sm border-b border-border/50 px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-20">
+  <div className="flex items-center gap-2 sm:gap-3">
+    <BackButton />
+
+    <div className="w-8 h-8 sm:w-9 sm:h-9 bg-primary/10 rounded-xl flex items-center justify-center">
+      <SettingsIcon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+    </div>
+
+    <div>
+      <h1 className="text-lg sm:text-2xl font-bold text-foreground leading-snug">
+        Settings
+      </h1>
+      <p className="text-xs sm:text-sm text-muted-foreground">
+        Manage your account and application preferences
+      </p>
+    </div>
+  </div>
+</div>
+
 
       <div className="p-6  mx-auto">
 

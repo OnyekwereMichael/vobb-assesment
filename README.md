@@ -120,7 +120,7 @@ src/
 │   ├── ui/           # Reusable UI components (Card, Button, Table, Avatar)
 │   ├── layout/       # Navbar, Sidebar, Footer
 │   └── theme/        # Theme provider and context
-├── pages/            # Next.js pages
+├── pages/           
 ├── lib/
 │   ├── query/        # React Query hooks for data fetching
 │   └── utils/        # Utility functions

@@ -64,7 +64,7 @@ const Index = () => {
   useEffect(() => {
     const user = auth.currentUser;
     if (user) {
-      setUserName(user.displayName || user.email); 
+      setUserName(user.displayName || user.email);
     }
   }, []);
 
@@ -153,50 +153,64 @@ const Index = () => {
       <Navbar />
 
       {/* 👇 show logged in user */}
-      <div className="px-6 pt-6">
+      <div className="px-6 pt-6 max-sm:px-4">
         <h2 className={`text-lg font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
           Welcome, {userName || "Guest"} 👋
         </h2>
       </div>
 
       {/* Dashboard Header */}
-      <div className="flex items-center justify-between p-6 bg-card border-b border-border">
-        <div>
-          <h2 className="text-2xl font-bold">Deal Management</h2>
-          <p className="text-muted-foreground">
+      <div className="flex flex-wrap items-start justify-between gap-6 p-6 bg-card border-b border-border max-sm:p-4">
+        {/* Left Section */}
+        <div className="flex-1 min-w-[220px]">
+          <h2 className="text-2xl font-bold max-sm:mb-3">Deal Management</h2>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Manage your sales pipeline • {deals.length} active deals
           </p>
         </div>
 
-        <div className="flex items-center space-x-4">
-          <Input
-            placeholder="Search deals..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-64"
-          />
+        {/* Right Section */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+          {/* Search Input */}
+          <div className="relative w-full sm:w-64">
+            <Input
+              placeholder="Search deals..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full"
+            />
 
-           {searchQuery !== debouncedQuery && (
-      <div className="absolute right-3 top-1/2 -translate-y-1/2">
-        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
-      </div>
-)}
+            {/* Loader */}
+            {searchQuery !== debouncedQuery && (
+              <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+              </div>
+            )}
+          </div>
 
-          <div className="flex rounded-lg border border-border p-1 bg-muted">
+          {/* View Mode Toggle */}
+          <div className="flex justify-between sm:justify-start rounded-lg border border-border p-1 bg-muted w-full sm:w-auto">
             <Button
               variant={viewMode === 'table' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => setViewMode('table')}
-              className={viewMode === 'table' ? `bg-card shadow-sm text-black ${theme === 'dark' ? 'text-white' : 'text-black'}` : 'text-black'}
+              className={`flex-1 sm:flex-none ${viewMode === 'table'
+                ? `bg-card shadow-sm ${theme === 'dark' ? 'text-white' : 'text-black'}`
+                : 'text-black'
+                }`}
             >
               <TableIcon className="w-4 h-4 mr-2" />
               Table
             </Button>
+
             <Button
               variant={viewMode === 'kanban' ? 'default' : 'ghost'}
               size="sm"
               onClick={() => setViewMode('kanban')}
-              className={viewMode === 'kanban' ? `bg-card shadow-sm text-black ${theme === 'dark' ? 'text-white' : 'text-black'}` : 'text-black'}
+              className={`flex-1 sm:flex-none ${viewMode === 'kanban'
+                ? `bg-card shadow-sm ${theme === 'dark' ? 'text-white' : 'text-black'}`
+                : 'text-black'
+                }`}
             >
               <Kanban className="w-4 h-4 mr-2" />
               Kanban
@@ -205,66 +219,105 @@ const Index = () => {
         </div>
       </div>
 
+
       {/* Main Content */}
-      <div className="p-6">
+      <div className="p-6 max-sm:p-4">
         {viewMode === 'table' ? (
           <div>
             <h3 className="text-lg font-semibold mb-4">Deals Overview</h3>
 
             {/* Table Preferences */}
-            <div className="flex space-x-4 mb-4">
-              {Object.keys(tableColumns).map((col) => (
-                <label key={col} className="flex items-center space-x-2 text-sm">
-                  <Checkbox
-                    checked={tableColumns[col]}
-                    onCheckedChange={() => toggleTableColumn(col)}
-                  />
-                  <span>{col}</span>
-                </label>
-              ))}
+            <div className="mb-4 p-4 bg-muted/40 rounded-xl border border-border">
+              <h3 className="text-sm font-medium text-foreground mb-3">Visible Columns</h3>
+              <div className="flex flex-wrap gap-3 sm:gap-4">
+                {Object.keys(tableColumns).map((col) => (
+                  <label
+                    key={col}
+                    className="flex items-center gap-2 px-3 py-2 bg-background rounded-lg border border-border cursor-pointer hover:bg-accent transition-colors"
+                  >
+                    <Checkbox
+                      checked={tableColumns[col]}
+                      onCheckedChange={() => toggleTableColumn(col)}
+                    />
+                    <span className="text-sm capitalize">{col}</span>
+                  </label>
+                ))}
+              </div>
             </div>
 
-            <Card className="overflow-hidden">
+
+            <Card className="overflow-hidden shadow-sm rounded-xl border border-border max-sm:w-full">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-muted/50">
-                    {tableColumns.clientName && <TableHead>Client Name</TableHead>}
-                    {tableColumns.productName && <TableHead>Product Name</TableHead>}
-                    {tableColumns.stage && <TableHead>Deal Stage</TableHead>}
-                    {tableColumns.createdAt && <TableHead>Created Date</TableHead>}
-                    <TableHead>Actions</TableHead>
+                  <TableRow className="bg-muted/40 text-foreground max-sm:w-full">
+                    {tableColumns.clientName && (
+                      <TableHead className="px-4 py-3 text-sm max-sm:w-full font-semibold">Client Name</TableHead>
+                    )}
+                    {tableColumns.productName && (
+                      <TableHead className="px-4 py-3 text-sm font-semibold max-sm:w-full">Product Name</TableHead>
+                    )}
+                    {tableColumns.stage && (
+                      <TableHead className="px-4 py-3 text-sm font-semibold">Deal Stage</TableHead>
+                    )}
+                    {tableColumns.createdAt && (
+                      <TableHead className="px-4 py-3 text-sm font-semibold">Created Date</TableHead>
+                    )}
+                    <TableHead className="px-4 py-3 text-sm font-semibold text-right">
+                      Actions
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredDeals.map((deal) => {
+                  {filteredDeals.map((deal, idx) => {
                     const client = getClientById(deal.clientId);
                     const product = getProductById(deal.productId);
                     return (
-                      <TableRow key={deal.id} className="hover:bg-muted/30">
-                        {tableColumns.clientName && <TableCell className="font-medium">{client?.name}</TableCell>}
-                        {tableColumns.productName && <TableCell>{product?.name}</TableCell>}
+                      <TableRow
+                        key={deal.id}
+                        className={`transition-colors ${idx % 2 === 0 ? "bg-background" : "bg-muted/20"
+                          } hover:bg-muted/30`}
+                      >
+                        {tableColumns.clientName && (
+                          <TableCell className="px-4 py-3 font-medium">{client?.name}</TableCell>
+                        )}
+                        {tableColumns.productName && (
+                          <TableCell className="px-4 py-3">{product?.name}</TableCell>
+                        )}
                         {tableColumns.stage && (
-                          <TableCell>
+                          <TableCell className="px-4 py-3">
                             <Badge className={getStageColor(deal.stage)}>{deal.stage}</Badge>
                           </TableCell>
                         )}
-                        {tableColumns.createdAt && <TableCell>{formatToShortDate(deal.createdAt)}</TableCell>}
-                        <TableCell>
+                        {tableColumns.createdAt && (
+                          <TableCell className="px-4 py-3">
+                            {formatToShortDate(deal.createdAt)}
+                          </TableCell>
+                        )}
+                        <TableCell className="px-4 py-3 text-right">
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm">
+                              <Button variant="ghost" size="sm" className="hover:bg-accent">
                                 <MoreHorizontal className="h-4 w-4" />
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                              <DropdownMenuItem onClick={() => navigate(`/deals/${deal.id}`)}>
-                                <Eye className="mr-2 h-4 w-4" />View
+                            <DropdownMenuContent align="end" className="rounded-lg shadow-md">
+                              <DropdownMenuItem
+                                onClick={() => navigate(`/deals/${deal.id}`)}
+                                className="cursor-pointer"
+                              >
+                                <Eye className="mr-2 h-4 w-4" /> View
                               </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => navigate(`/deals/${deal.id}/edit`)}>
+                              <DropdownMenuItem
+                                onClick={() => navigate(`/deals/${deal.id}/edit`)}
+                                className="cursor-pointer"
+                              >
                                 <Edit className="mr-2 h-4 w-4" /> Edit
                               </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handleDelete(deal.id)}>
-                                <Trash2 className="mr-2 h-4 w-4" />Delete
+                              <DropdownMenuItem
+                                onClick={() => handleDelete(deal.id)}
+                                className="cursor-pointer text-red-600 focus:text-red-600"
+                              >
+                                <Trash2 className="mr-2 h-4 w-4" /> Delete
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
@@ -275,27 +328,33 @@ const Index = () => {
                 </TableBody>
               </Table>
             </Card>
+
           </div>
         ) : (
           <div>
             <h3 className="text-lg font-semibold mb-6">Pipeline Overview</h3>
 
             {/* Kanban Preferences */}
-            <div className="flex space-x-4 mb-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               {Object.keys(kanbanMetadata).map((meta) => (
-                <label key={meta} className="flex items-center space-x-2 text-sm">
+                <label
+                  key={meta}
+                  className="flex items-center gap-2 px-3 py-2 bg-background rounded-lg border border-border cursor-pointer hover:bg-accent transition-colors"
+                >
                   <Checkbox
                     checked={kanbanMetadata[meta]}
                     onCheckedChange={() => toggleKanbanMetadata(meta)}
                   />
-                  <span>{meta}</span>
+                  <span className="text-sm capitalize">{meta}</span>
                 </label>
               ))}
             </div>
 
+
+
             {/* Kanban */}
             <DragDropContext onDragEnd={onDragEnd}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-sm:mt-4">
                 {stages.map((stage) => {
                   const stageDeals = filteredDeals.filter((deal) => deal.stage === stage);
                   return (

@@ -81,45 +81,50 @@ export const Profile = () => {
   return (
     <div className="min-h-screen bg-background theme-transition">
       {/* Header */}
-      <div className="bg-background/95 backdrop-blur-sm border-b border-border/50 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Button
-              onClick={() => navigate(-1)}
-              variant="ghost"
-              className="flex items-center space-x-2"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Back</span>
-            </Button>
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                <User className="w-4 h-4 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-foreground">Profile</h1>
-                <p className="text-sm text-muted-foreground">
-                  View and manage your profile information
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex space-x-2">
-            <Button className="theme-transition">
-              <Edit3 className="w-4 h-4 mr-2" />
-              Edit Profile
-            </Button>
-            <Button
-              onClick={handleLogout}
-              variant="destructive"
-              className="theme-transition flex items-center space-x-1"
-            >
-              <LogOut className="w-4 h-4" />
-              <span>Logout</span>
-            </Button>
-          </div>
+      <div className="bg-background/95 backdrop-blur-sm border-b border-border/50 px-4 sm:px-6 py-3 sm:py-4">
+  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    {/* Left Section */}
+    <div className="flex items-start sm:items-center space-x-3">
+      <Button
+        onClick={() => navigate(-1)}
+        variant="ghost"
+        className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        <span className="hidden xs:inline">Back</span>
+      </Button>
+
+      <div className="flex items-center space-x-2 sm:space-x-3">
+        <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+          <User className="w-4 h-4 text-primary" />
+        </div>
+        <div>
+          <h1 className="text-lg sm:text-2xl font-bold text-foreground">Profile</h1>
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            View and manage your profile info
+          </p>
         </div>
       </div>
+    </div>
+
+    {/* Right Section */}
+    <div className="flex flex-col xs:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+      <Button className="w-full xs:w-auto theme-transition">
+        <Edit3 className="w-4 h-4 mr-1 sm:mr-2" />
+        <span className="text-sm sm:text-base">Edit</span>
+      </Button>
+      <Button
+        onClick={handleLogout}
+        variant="destructive"
+        className="w-full xs:w-auto theme-transition flex items-center justify-center"
+      >
+        <LogOut className="w-4 h-4 mr-1 sm:mr-2" />
+        <span className="text-sm sm:text-base">Logout</span>
+      </Button>
+    </div>
+  </div>
+</div>
+
 
       <div className="p-6 mx-auto">
         <div className="grid gap-6 lg:grid-cols-3">
