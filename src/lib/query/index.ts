@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { QUERY_KEYS } from "../enum";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://vobb-backend-1.onrender.com";
 export const useCreateDeal = () => {
     const navigate = useNavigate()
   const queryClient = useQueryClient();
@@ -283,3 +283,30 @@ export const useUpdateDeal = () => {
 
 
 
+
+
+export const useGetSearch = (query: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_SEARCH, query],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${BASE_URL}/deals?query=${query}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || "Failed to fetch deal");
+        return data; // return single deal object
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    },
+    enabled: !!query, // ✅ only fetch if query exists
+    retry: false,
+  });
+};

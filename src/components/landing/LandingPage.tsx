@@ -123,7 +123,7 @@ export const LandingPage = () => {
                 <Badge className="bg-primary/10 text-primary border-primary/20">
                   Atlas Module • Deal Management Platform
                 </Badge>
-                <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                <h1 className="text-4xl lg:text-4xl font-bold leading-tight">
                   Manage Deals Like a
                   <span className="text-primary"> Pro</span>
                 </h1>

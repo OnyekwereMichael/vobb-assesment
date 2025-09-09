@@ -8,5 +8,6 @@ export enum QUERY_KEYS {
     GET_ALLCLIENT = "getAllClient",
     GET_ALLSTAGE = "getAllStage",
     GET_ALLDEALS = "getAllDeals",
-    GET_SINGLE_DEAL = "getSingleDeal"
+    GET_SINGLE_DEAL = "getSingleDeal",
+    GET_SEARCH = "getSearch",
     }
