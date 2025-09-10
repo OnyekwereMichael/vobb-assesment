@@ -1,8 +1,17 @@
-Table of Contents
+📊 Vobb Deal Management Dashboard
+
+A modern web platform to manage clients, products, and deals efficiently.
+Built with React, Tailwind CSS, Zustand, and React Query, the dashboard integrates Kanban boards, customizable tables, authentication, and performance tracking — optimized for desktop, tablet, and mobile.
+
+📑 Table of Contents
 
 Overview
 
 Features
+
+Core Features
+
+UI/UX Enhancements
 
 Tech Stack
 
@@ -16,73 +25,102 @@ Future Improvements
 
 License
 
-Overview
+🔎 Overview
 
 This platform enables teams to:
 
 Manage client data, products, and deals in one place
 
-Track deals through multiple stages using Kanban boards
+Track deals through multiple stages with Kanban boards
 
 Visualize performance metrics with dashboards
 
 Add, edit, and delete deals with ease
 
-Access responsive views optimized for desktop, tablet, and mobile
+Access responsive views across devices
 
 Authenticate users with Firebase Auth
 
-Maintain consistent theming (light & dark modes) across the app
+Maintain light & dark themes consistently
 
-It integrates modern UI components with advanced features like drag-and-drop Kanban, customizable tables, real-time search filtering, and notifications.
+It integrates modern UI components with advanced features like:
+✅ Drag-and-drop Kanban
+✅ Customizable tables
+✅ Real-time search filtering
+✅ Toast notifications
 
-Features
+⚡ Features
 Core Features
 
-User Authentication: Firebase Authentication for login, logout, and profile management
+User Authentication – Firebase Auth (login, logout, profile management)
 
-Deals CRUD: Create, update, and delete deals with live data
+Deals CRUD – Create, update, and delete deals with live sync
 
-Kanban View: Drag-and-drop deal stages, fully interactive
+Kanban View – Interactive drag-and-drop stages
 
-Table View: Customizable columns and filtering
+Table View – Customizable columns and filtering
 
-Responsive Design: Mobile-first design using Tailwind CSS and Material UI components
+Responsive Design – Mobile-first with Tailwind + MUI
 
-Profile Management: View and edit profile info including avatar, role, and stats
+Profile Management – Avatar, role, and performance stats
 
-Notifications: Real-time toast alerts for actions like creating, updating, or deleting deals
-
+Notifications – Real-time feedback on user actions
 
 UI/UX Enhancements
 
-Light and Dark themes with seamless transitions
+Light/Dark themes with smooth transitions
 
-Modern design with Cards, Badges, Avatars, and Tables
+Modern UI with Cards, Badges, Avatars, and Tables
 
 Hero sections and onboarding visuals
 
-Interactive components such as dropdown menus, modals, and buttons
+Interactive dropdowns, modals, and buttons
 
-Tech Stack
+🛠️ Tech Stack
+Frontend
 
-Frontend: React, Next.js (App Router), TypeScript (optional)
+React 18 (with Vite)
 
-Styling: Tailwind CSS, Material UI (MUI v5), Lucide Icons
+TypeScript (optional)
 
-State Management: Zustand (Kanban & Preferences stores)
+Next.js (App Router) (for advanced routing setups)
 
-Backend / Data Fetching: Firebase Auth, Json-Server, React Query
+Styling
 
-Utilities: Formik + Yup (forms & validation), Sonner (notifications)
+Tailwind CSS
 
-Testing: Vitest for unit testing
+Material UI v5
 
-Installation
+Lucide Icons
+
+State & Data
+
+Zustand – Lightweight global state management
+
+React Query (TanStack Query) – Data fetching, caching, mutations
+
+Json-Server – Mock backend
+
+Firebase Auth – Authentication & user management
+
+Utilities
+
+Formik + Yup – Forms & validation
+
+Sonner – Toast notifications
+
+Testing
+
+Vitest – Unit testing
+
+React Testing Library – Component rendering tests
+
+⚙️ Installation
 
 Clone the repository:
 
 git clone https://github.com/OnyekwereMichael/vobb-assesment.git
+
 
 
 Install dependencies:
@@ -92,53 +130,51 @@ npm install
 yarn install
 
 
-
-
 Run the project locally:
 
 npm run dev
 # or
 yarn dev
 
-Usage
+🚀 Usage
 
-Navigate to / to view the landing page
+Navigate to / → Landing Page
 
-After login, access the Dashboard to view deals
+Login to access the Dashboard
 
 Switch between Table View and Kanban View
 
 Add, edit, or delete deals
 
-Track performance metrics in the Profile section
 
-Toggle themes via the theme switcher
+Toggle Light/Dark mode via theme switcher
 
-Project Structure
+📂 Project Structure
 src/
 ├── components/
-│   ├── ui/           # Reusable UI components (Card, Button, Table, Avatar)
-│   ├── layout/       # Navbar, Sidebar, Footer
-│   └── theme/        # Theme provider and context
-├── pages/           
+│   ├── ui/         # Reusable UI components (Card, Button, Table, Avatar)
+│   ├── layout/     # Navbar, Sidebar, Footer
+│   └── theme/      # Theme provider and context
+├── pages/          # Page routes
 ├── lib/
-│   ├── query/        # React Query hooks for data fetching
-│   └── utils/        # Utility functions
-├── store/            # Zustand stores (Kanban, Preferences, ViewMode)
-└── firebase/         # Firebase configuration and auth
+│   ├── query/      # React Query hooks for data fetching
+│   └── utils/      # Utility functions (helpers, formatters)
+├── store/          # Zustand stores (Kanban, Preferences, ViewMode)
+└── firebase/       # Firebase config & authentication
 
-Future Improvements
+🔮 Future Improvements
 
 Real-time updates with Firestore listeners
 
-Team-based access and roles
+Team-based access control with roles & permissions
 
-Advanced analytics and charting dashboards
+Advanced analytics dashboards (charts, KPIs)
 
-Email notifications and alerts
+Email notifications for important events
 
-Integration with external CRMs or ERP systems
+Integration with external CRMs/ERPs
 
-License
+📜 License
 
-This project is MIT licensed.
+This project is licensed under the MIT License.
+
