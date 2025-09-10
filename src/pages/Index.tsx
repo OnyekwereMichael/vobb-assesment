@@ -246,88 +246,100 @@ const Index = () => {
             </div>
 
 
-            <Card className="overflow-hidden shadow-sm rounded-xl border border-border max-sm:w-full">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-muted/40 text-foreground max-sm:w-full">
-                    {tableColumns.clientName && (
-                      <TableHead className="px-4 py-3 text-sm max-sm:w-full font-semibold">Client Name</TableHead>
-                    )}
-                    {tableColumns.productName && (
-                      <TableHead className="px-4 py-3 text-sm font-semibold max-sm:w-full">Product Name</TableHead>
-                    )}
-                    {tableColumns.stage && (
-                      <TableHead className="px-4 py-3 text-sm font-semibold">Deal Stage</TableHead>
-                    )}
-                    {tableColumns.createdAt && (
-                      <TableHead className="px-4 py-3 text-sm font-semibold">Created Date</TableHead>
-                    )}
-                    <TableHead className="px-4 py-3 text-sm font-semibold text-right">
-                      Actions
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredDeals.map((deal, idx) => {
-                    const client = getClientById(deal.clientId);
-                    const product = getProductById(deal.productId);
-                    return (
-                      <TableRow
-                        key={deal.id}
-                        className={`transition-colors ${idx % 2 === 0 ? "bg-background" : "bg-muted/20"
-                          } hover:bg-muted/30`}
-                      >
-                        {tableColumns.clientName && (
-                          <TableCell className="px-4 py-3 font-medium">{client?.name}</TableCell>
-                        )}
-                        {tableColumns.productName && (
-                          <TableCell className="px-4 py-3">{product?.name}</TableCell>
-                        )}
-                        {tableColumns.stage && (
-                          <TableCell className="px-4 py-3">
-                            <Badge className={getStageColor(deal.stage)}>{deal.stage}</Badge>
-                          </TableCell>
-                        )}
-                        {tableColumns.createdAt && (
-                          <TableCell className="px-4 py-3">
-                            {formatToShortDate(deal.createdAt)}
-                          </TableCell>
-                        )}
-                        <TableCell className="px-4 py-3 text-right">
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm" className="hover:bg-accent">
-                                <MoreHorizontal className="h-4 w-4" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="rounded-lg shadow-md">
-                              <DropdownMenuItem
-                                onClick={() => navigate(`/deals/${deal.id}`)}
-                                className="cursor-pointer"
-                              >
-                                <Eye className="mr-2 h-4 w-4" /> View
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => navigate(`/deals/${deal.id}/edit`)}
-                                className="cursor-pointer"
-                              >
-                                <Edit className="mr-2 h-4 w-4" /> Edit
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => handleDelete(deal.id)}
-                                className="cursor-pointer text-red-600 focus:text-red-600"
-                              >
-                                <Trash2 className="mr-2 h-4 w-4" /> Delete
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </Card>
+          <Card className="overflow-x-auto shadow-sm rounded-xl border border-border max-sm:w-full">
+  <div className="w-full min-w-[600px]"> {/* 👈 ensures spacing on mobile */}
+    <Table className="w-full table-fixed">
+      <TableHeader>
+        <TableRow className="bg-muted/40 text-foreground ">
+          {tableColumns.clientName && (
+            <TableHead className="px-4 py-3 text-sm font-semibold min-w-[120px]">
+              Client Name
+            </TableHead>
+          )}
+          {tableColumns.productName && (
+            <TableHead className="px-4 py-3 text-sm font-semibold min-w-[120px] ">
+              Product Name
+            </TableHead>
+          )}
+          {tableColumns.stage && (
+            <TableHead className="px-4 py-3 text-sm font-semibold min-w-[100px]">
+              Deal Stage
+            </TableHead>
+          )}
+          {tableColumns.createdAt && (
+            <TableHead className="px-4 py-3 text-sm font-semibold min-w-[120px]">
+              Created Date
+            </TableHead>
+          )}
+          <TableHead className="px-4 py-3 text-sm font-semibold text-right min-w-[100px]">
+            Actions
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {filteredDeals.map((deal, idx) => {
+          const client = getClientById(deal.clientId);
+          const product = getProductById(deal.productId);
+          return (
+            <TableRow
+              key={deal.id}
+              className={`transition-colors ${
+                idx % 2 === 0 ? "bg-background" : "bg-muted/20"
+              } hover:bg-muted/30`}
+            >
+              {tableColumns.clientName && (
+                <TableCell className="px-4 py-3 font-medium">{client?.name}</TableCell>
+              )}
+              {tableColumns.productName && (
+                <TableCell className="px-4 py-3">{product?.name}</TableCell>
+              )}
+              {tableColumns.stage && (
+                <TableCell className="px-4 py-3">
+                  <Badge className={getStageColor(deal.stage)}>{deal.stage}</Badge>
+                </TableCell>
+              )}
+              {tableColumns.createdAt && (
+                <TableCell className="px-4 py-3">
+                  {formatToShortDate(deal.createdAt)}
+                </TableCell>
+              )}
+              <TableCell className="px-4 py-3 text-right">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm" className="hover:bg-accent">
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="rounded-lg shadow-md">
+                    <DropdownMenuItem
+                      onClick={() => navigate(`/deals/${deal.id}`)}
+                      className="cursor-pointer"
+                    >
+                      <Eye className="mr-2 h-4 w-4" /> View
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => navigate(`/deals/${deal.id}/edit`)}
+                      className="cursor-pointer"
+                    >
+                      <Edit className="mr-2 h-4 w-4" /> Edit
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => handleDelete(deal.id)}
+                      className="cursor-pointer text-red-600 focus:text-red-600"
+                    >
+                      <Trash2 className="mr-2 h-4 w-4" /> Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  </div>
+</Card>
+
 
           </div>
         ) : (
