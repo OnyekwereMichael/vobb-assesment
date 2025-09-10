@@ -108,7 +108,7 @@ export const Profile = () => {
     </div>
 
     {/* Right Section */}
-    <div className="flex flex-col xs:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+    <div className="flex max-sm:flex-row max-sm:mt-3 xs:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
       <Button className="w-full xs:w-auto theme-transition">
         <Edit3 className="w-4 h-4 mr-1 sm:mr-2" />
         <span className="text-sm sm:text-base">Edit</span>
@@ -126,115 +126,115 @@ export const Profile = () => {
 </div>
 
 
-      <div className="p-6 mx-auto">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {/* Profile Info */}
-          <div className="lg:col-span-1">
-            <Card className="premium-card theme-transition">
-              <CardHeader className="text-center pb-4">
-                <Avatar className="w-24 h-24 mx-auto mb-4">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="text-2xl bg-primary/10 text-primary">
-                    {user.name
-                      .split(" ")
-                      .map((n: string) => n[0])
-                      .join("")}
-                  </AvatarFallback>
-                </Avatar>
-                <CardTitle className="text-xl">{user.name}</CardTitle>
-                <CardDescription className="text-sm">{user.role}</CardDescription>
-                <Badge variant="secondary" className="mt-2">
-                  Active
-                </Badge>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3 text-sm">
-                    <Mail className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-foreground">{user.email}</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-sm">
-                    <Phone className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-foreground">{user.phone}</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-sm">
-                    <Building className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-foreground">{user.company}</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-sm">
-                    <MapPin className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-foreground">{user.location}</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-sm">
-                    <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-foreground">Joined {user.joinDate}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+   <div className="p-6 mx-auto">
+  <div className="grid gap-8 lg:grid-cols-3">
+    {/* Profile Info */}
+    <div className="lg:col-span-1">
+      <Card className="premium-card theme-transition shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl">
+        <CardHeader className="text-center pb-6">
+          <Avatar className="w-28 h-28 mx-auto mb-4 ring-4 ring-primary/10 shadow-md">
+            <AvatarImage src={user.avatar} alt={user.name} />
+            <AvatarFallback className="text-2xl bg-primary/10 text-primary">
+              {user.name
+                .split(" ")
+                .map((n: string) => n[0])
+                .join("")}
+            </AvatarFallback>
+          </Avatar>
+          <CardTitle className="text-2xl font-semibold text-foreground">{user.name}</CardTitle>
+          <CardDescription className="text-sm text-muted-foreground">
+            {user.role}
+          </CardDescription>
+          <Badge variant="secondary" className="mt-3 px-4 py-1.5 rounded-full flex items-center justify-center">
+            <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+            Active
+          </Badge>
+        </CardHeader>
+        <CardContent className="space-y-5 text-sm">
+          <div className="space-y-3">
+            <div className="flex items-center space-x-3">
+              <Mail className="w-4 h-4 text-muted-foreground" />
+              <span>{user.email}</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Phone className="w-4 h-4 text-muted-foreground" />
+              <span>{user.phone}</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Building className="w-4 h-4 text-muted-foreground" />
+              <span>{user.company}</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <MapPin className="w-4 h-4 text-muted-foreground" />
+              <span>{user.location}</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Calendar className="w-4 h-4 text-muted-foreground" />
+              <span>Joined {user.joinDate}</span>
+            </div>
           </div>
+        </CardContent>
+      </Card>
+    </div>
 
-          {/* Performance & Activity */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Performance Overview */}
-            <Card className="premium-card theme-transition">
-              <CardHeader className="pb-4">
-                <div className="flex items-center space-x-2">
-                  <TrendingUp className="w-5 h-5 text-primary" />
-                  <CardTitle className="text-lg">Performance Overview</CardTitle>
-                </div>
-                <CardDescription>Your sales performance metrics</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="text-center p-4 bg-muted/30 rounded-xl">
-                    <Target className="w-8 h-8 text-primary mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-foreground">
-                      {user.stats.totalDeals}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Total Deals</div>
-                  </div>
-                  <div className="text-center p-4 bg-muted/30 rounded-xl">
-                    <Award className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-foreground">
-                      {user.stats.completedDeals}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Completed</div>
-                  </div>
-                  <div className="text-center p-4 bg-muted/30 rounded-xl">
-                    <TrendingUp className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-foreground">
-                      {user.stats.winRate}%
-                    </div>
-                    <div className="text-xs text-muted-foreground">Win Rate</div>
-                  </div>
-                  <div className="text-center p-4 bg-muted/30 rounded-xl">
-                    <DollarSign className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-foreground">
-                      ${(user.stats.totalValue / 1000000).toFixed(1)}M
-                    </div>
-                    <div className="text-xs text-muted-foreground">Total Value</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Recent Activity */}
-            <Card className="premium-card theme-transition">
-              <CardHeader className="pb-4">
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-primary" />
-                  <CardTitle className="text-lg">Recent Activity</CardTitle>
-                </div>
-                <CardDescription>Your latest actions and updates</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">No recent activities yet.</p>
-              </CardContent>
-            </Card>
+    {/* Performance & Activity */}
+    <div className="lg:col-span-2 space-y-8">
+      {/* Performance Overview */}
+      <Card className="premium-card theme-transition shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl">
+        <CardHeader className="pb-4 border-b">
+          <div className="flex items-center space-x-2">
+            <TrendingUp className="w-5 h-5 text-primary" />
+            <CardTitle className="text-lg font-semibold">Performance Overview</CardTitle>
           </div>
-        </div>
-      </div>
+          <CardDescription>Your sales performance metrics</CardDescription>
+        </CardHeader>
+        <CardContent className="pt-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="flex flex-col items-center p-5 bg-muted/40 rounded-xl shadow-sm hover:bg-muted/60 transition">
+              <Target className="w-8 h-8 text-primary mb-2" />
+              <div className="text-2xl font-bold">{user.stats.totalDeals}</div>
+              <div className="text-xs text-muted-foreground">Total Deals</div>
+            </div>
+            <div className="flex flex-col items-center p-5 bg-muted/40 rounded-xl shadow-sm hover:bg-muted/60 transition">
+              <Award className="w-8 h-8 text-green-600 mb-2" />
+              <div className="text-2xl font-bold">{user.stats.completedDeals}</div>
+              <div className="text-xs text-muted-foreground">Completed</div>
+            </div>
+            <div className="flex flex-col items-center p-5 bg-muted/40 rounded-xl shadow-sm hover:bg-muted/60 transition">
+              <TrendingUp className="w-8 h-8 text-blue-600 mb-2" />
+              <div className="text-2xl font-bold">{user.stats.winRate}%</div>
+              <div className="text-xs text-muted-foreground">Win Rate</div>
+            </div>
+            <div className="flex flex-col items-center p-5 bg-muted/40 rounded-xl shadow-sm hover:bg-muted/60 transition">
+              <DollarSign className="w-8 h-8 text-green-600 mb-2" />
+              <div className="text-2xl font-bold">
+                ${(user.stats.totalValue / 1000000).toFixed(1)}M
+              </div>
+              <div className="text-xs text-muted-foreground">Total Value</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Recent Activity */}
+      <Card className="premium-card theme-transition shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl">
+        <CardHeader className="pb-4 border-b">
+          <div className="flex items-center space-x-2">
+            <Clock className="w-5 h-5 text-primary" />
+            <CardTitle className="text-lg font-semibold">Recent Activity</CardTitle>
+          </div>
+          <CardDescription>Your latest actions and updates</CardDescription>
+        </CardHeader>
+        <CardContent className="pt-6">
+          <p className="text-sm text-muted-foreground text-center">
+            No recent activities yet.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</div>
+
     </div>
   );
 };

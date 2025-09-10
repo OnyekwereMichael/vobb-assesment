@@ -132,7 +132,7 @@ export const Login = () => {
                   <Form className="space-y-6">
                     {/* Email */}
                     <div className="space-y-2">
-                      <Label htmlFor="email">Corporate Email</Label>
+                      <Label htmlFor="email">Email</Label>
                       <Field
                         as={Input}
                         id="email"

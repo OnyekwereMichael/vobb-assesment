@@ -354,7 +354,7 @@ const Index = () => {
 
             {/* Kanban */}
             <DragDropContext onDragEnd={onDragEnd}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-sm:mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
                 {stages.map((stage) => {
                   const stageDeals = filteredDeals.filter((deal) => deal.stage === stage);
                   return (

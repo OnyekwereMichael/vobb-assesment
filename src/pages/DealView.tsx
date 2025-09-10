@@ -51,32 +51,36 @@ export const DealView = () => {
   return (
     <div className="container mx-auto px-6 py-8 max-w-4xl">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate(-1)}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
-          </Button>
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">Deal Details</h1>
-            <p className="text-muted-foreground">
-              Created {deal.createdDate ? formatDate(deal.createdDate) : "N/A"}
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center space-x-2">
-          <Button variant="outline" asChild>
-            <Link to={`/deals/${deal.id}/edit`}>
-              <Edit className="w-4 h-4 mr-2" />
-              Edit
-            </Link>
-          </Button>
-          <Button variant="destructive" onClick={handleDelete}>
-            <Trash2 className="w-4 h-4 mr-2" />
-            Delete
-          </Button>
-        </div>
-      </div>
+ <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+  {/* Left side */}
+  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 gap-2">
+    <Button variant="ghost" size="sm" onClick={() => navigate(-1)} className="flex items-center">
+      <ArrowLeft className="w-4 h-4 mr-2" />
+      Back
+    </Button>
+    <div>
+      <h1 className="text-2xl md:text-3xl font-bold text-foreground">Deal Details</h1>
+      <p className="text-muted-foreground text-sm md:text-base">
+        Created {deal.createdDate ? formatDate(deal.createdDate) : "N/A"}
+      </p>
+    </div>
+  </div>
+
+  {/* Right side */}
+  <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
+    <Button variant="outline" asChild>
+      <Link to={`/deals/${deal.id}/edit`} className="flex items-center">
+        <Edit className="w-4 h-4 mr-2" />
+        Edit
+      </Link>
+    </Button>
+    <Button variant="destructive" onClick={handleDelete} className="flex items-center">
+      <Trash2 className="w-4 h-4 mr-2" />
+      Delete
+    </Button>
+  </div>
+</div>
+
 
       {/* Deal Overview */}
       <Card>

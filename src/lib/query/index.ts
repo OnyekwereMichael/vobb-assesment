@@ -199,7 +199,7 @@ export const useGetDeals = () => {
 
        const data = await res.json();
 
-       toast.success("Deals Sucessfully Created")
+       toast.success("Deals Retrieved Successfully")
         // Always return an array, fallback to empty array
         return data ?? [];
        
@@ -234,7 +234,8 @@ export const useGetDealByDealId = (id: string | number) => {
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Failed to fetch deal");
-        return data; // return single deal object
+        toast.success("Deal Retrieved Successfully")
+        return data; 
       } catch (error) {
         console.error(error);
         throw error;
@@ -298,6 +299,7 @@ export const useGetSearch = (query: string) => {
         });
 
         const data = await res.json();
+        toast.success("Deals Retrieved Successfully")
 
         if (!res.ok) throw new Error(data.error || "Failed to fetch deal");
         return data; // return single deal object
