@@ -20,7 +20,8 @@ export default defineConfig(({ mode }) => ({
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: "./vitest.setup.ts",
+    setupFiles: './src/setupTests.ts',
+     maxWorkers: 2,
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },

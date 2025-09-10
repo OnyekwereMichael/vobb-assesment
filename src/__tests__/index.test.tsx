@@ -1,27 +1,42 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import Index from "../pages/Index"; // adjust path if needed
+import Index from "../pages/Index"; // adjust path
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-// Small helper wrapper since component uses react-router
-const renderWithRouter = (ui: React.ReactNode) => {
-  return render(<BrowserRouter>{ui}</BrowserRouter>);
+// Helper to wrap with Router + QueryClient
+const renderWithProviders = (ui: React.ReactNode) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,   // ✅ avoids retries in test
+      },
+    },
+  });
+
+  return render(
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        {ui}
+      </QueryClientProvider>
+    </BrowserRouter>
+  );
 };
 
 describe("Index Page", () => {
   it("renders welcome text", () => {
-    renderWithRouter(<Index />);
+    renderWithProviders(<Index />);
     expect(screen.getByText(/Welcome/i)).toBeInTheDocument();
   });
 
   it("renders table and kanban toggle buttons", () => {
-    renderWithRouter(<Index />);
+    renderWithProviders(<Index />);
     expect(screen.getByRole("button", { name: /Table/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Kanban/i })).toBeInTheDocument();
   });
 
   it("toggles view mode when clicking Kanban button", () => {
-    renderWithRouter(<Index />);
+    renderWithProviders(<Index />);
     const kanbanButton = screen.getByRole("button", { name: /Kanban/i });
 
     fireEvent.click(kanbanButton);
@@ -31,7 +46,7 @@ describe("Index Page", () => {
   });
 
   it("shows search input", () => {
-    renderWithRouter(<Index />);
+    renderWithProviders(<Index />);
     const input = screen.getByPlaceholderText(/Search deals.../i);
     expect(input).toBeInTheDocument();
   });
