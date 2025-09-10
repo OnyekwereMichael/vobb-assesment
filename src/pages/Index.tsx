@@ -247,7 +247,7 @@ const Index = () => {
 
 
           <Card className="overflow-x-auto shadow-sm rounded-xl border border-border max-sm:w-full">
-  <div className="w-full min-w-[600px]"> {/* 👈 ensures spacing on mobile */}
+  <div className="w-full min-w-[600px] max-sm:min-w-[1100px]"> {/* 👈 ensures spacing on mobile */}
     <Table className="w-full table-fixed">
       <TableHeader>
         <TableRow className="bg-muted/40 text-foreground ">
