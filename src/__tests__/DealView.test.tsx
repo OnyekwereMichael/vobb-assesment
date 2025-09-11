@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, it, expect, vi } from "vitest";
 import { DealView } from "../pages/DealView"; 
+import "@testing-library/jest-dom/vitest"
 
 
 vi.mock("@/lib/query", () => ({
