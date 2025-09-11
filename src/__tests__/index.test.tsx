@@ -3,6 +3,7 @@ import { describe, it, expect } from "vitest";
 import Index from "../pages/Index"; // adjust path
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "@testing-library/jest-dom/vitest"
 
 // Helper to wrap with Router + QueryClient
 const renderWithProviders = (ui: React.ReactNode) => {

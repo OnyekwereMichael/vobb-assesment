@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 import { Settings } from "../../src/pages/Settings";
+import "@testing-library/jest-dom/vitest"
 
 // Mock Firebase auth
 vi.mock("../../src/components/Firebase/firebase", () => ({
