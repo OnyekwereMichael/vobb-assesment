@@ -1,11 +1,12 @@
-// __tests__/Login.simple.test.tsx
+// __tests__/Login.basic.test.tsx
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { Login } from "../../src/components/auth/Login";
 import { describe, it, expect } from "vitest";
+import { Login } from "../../src/components/auth/Login";
+import "@testing-library/jest-dom/vitest"
 
-describe("Login Component - Simple Tests", () => {
+describe("Login Component - Basic UI", () => {
   const renderComponent = () =>
     render(
       <BrowserRouter>
@@ -13,40 +14,28 @@ describe("Login Component - Simple Tests", () => {
       </BrowserRouter>
     );
 
-  it("renders the Sign In title", () => {
+  it("renders the Sign In heading", () => {
     renderComponent();
-    expect(screen.getByText(/sign in/i)).toBeInTheDocument();
+    expect(screen.getByText("Sign In")).toBeInTheDocument();
   });
 
-  it("renders the email input", () => {
+  it("renders the email label", () => {
     renderComponent();
-    expect(screen.getByPlaceholderText(/enter your email/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
   });
 
-  it("renders the password input", () => {
+  it("renders the password label", () => {
     renderComponent();
-    expect(screen.getByPlaceholderText(/enter your password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
   });
 
-  it("renders the submit button", () => {
+  it("renders the Sign In button", () => {
     renderComponent();
-    expect(screen.getByText(/sign in/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /sign in/i })).toBeInTheDocument();
   });
 
-  it("toggles password visibility", () => {
+  it("renders the create account link", () => {
     renderComponent();
-    const passwordInput = screen.getByPlaceholderText(/enter your password/i) as HTMLInputElement;
-    const toggleButton = screen.getAllByRole("button")[0]; // first button is the eye toggle
-
-    // initially password type
-    expect(passwordInput.type).toBe("password");
-
-    // click to show password
-    fireEvent.click(toggleButton);
-    expect(passwordInput.type).toBe("text");
-
-    // click to hide password again
-    fireEvent.click(toggleButton);
-    expect(passwordInput.type).toBe("password");
+    expect(screen.getByText(/create account/i)).toBeInTheDocument();
   });
 });

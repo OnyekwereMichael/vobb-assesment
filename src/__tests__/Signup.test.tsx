@@ -4,6 +4,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Signup } from "../../src/components/auth/Signup";
 import { expect, it, describe } from "vitest";
+import "@testing-library/jest-dom/vitest"
+
 
 describe("Signup Component - Simple Tests", () => {
   const renderComponent = () =>
@@ -37,7 +39,7 @@ describe("Signup Component - Simple Tests", () => {
     renderComponent();
 
     const passwordInput = screen.getByLabelText(/password/i) as HTMLInputElement;
-    const toggleButton = screen.getByRole("button", { hidden: true });
+    const toggleButton = screen.getByRole("button", { name: /toggle password visibility/i });
 
     // initial type should be password
     expect(passwordInput.type).toBe("password");
@@ -51,8 +53,9 @@ describe("Signup Component - Simple Tests", () => {
 
   it("renders link to login page", () => {
     renderComponent();
-    expect(screen.getByText(/sign in/i)).toBeInTheDocument();
-    expect(screen.getByText(/sign in/i).closest("a")).toHaveAttribute("href", "/login");
+    const signInLink = screen.getByRole("link", { name: /sign in/i });
+    expect(signInLink).toBeInTheDocument();
+    expect(signInLink).toHaveAttribute("href", "/login");
   });
 
   it("renders all form fields and button together", () => {
